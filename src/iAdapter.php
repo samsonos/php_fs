@@ -26,4 +26,13 @@ interface IAdapter
      * @return string|boolean Relative path to created file, false if there were errors
      */
     public function write($data, $filename = '', $uploadDir = '');
+
+    /**
+     * Check existing current file in current file system
+     * @param $filename string Filename
+     * @return boolean File exists or not
+     */
+    public function exists($filename);
+
+    public function getFile(& $filepath, $filename);
 }

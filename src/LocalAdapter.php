@@ -46,4 +46,14 @@ class LocalAdapter implements IAdapter
             return false;
         }
     }
+
+    public function exists($filename)
+    {
+
+    }
+
+    public function getFile(& $filepath, $filename)
+    {
+        return file_exists($filepath);
+    }
 }
