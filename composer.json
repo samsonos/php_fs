@@ -1,0 +1,14 @@
+{
+	"name":"samsonos/php_fs",
+	"require":{
+        "samsonos/php_core":"*"
+    },
+	"license":"Open Software License (OSL) v 3.0",
+	"homepage":"http://samsonos.com/",
+    "autoload" : {
+        "classmap": ["src/"],
+        "psr-0": {
+            "samsonos\\upload\\": "src/"
+        }
+    }
+}
