@@ -34,5 +34,9 @@ interface IAdapter
      */
     public function exists($filename);
 
-    public function getFile(& $filepath, $filename);
+    public function read($filePath, $filename);
+
+    public function writeFile($filePath, $filename, $uploadDir);
+
+    public function delete($filename);
 }
