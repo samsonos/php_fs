@@ -34,9 +34,27 @@ interface IAdapter
      */
     public function exists($filename);
 
+    /**
+     * Read the file from current file system
+     * @param $filePath string Path to file
+     * @param $filename string
+     * @return mixed
+     */
     public function read($filePath, $filename);
 
+    /**
+     * Write a file to selected location
+     * @param $filePath string Path to file
+     * @param $filename string
+     * @param $uploadDir string
+     * @return mixed
+     */
     public function writeFile($filePath, $filename, $uploadDir);
 
+    /**
+     * Delete file from current file system
+     * @param $filename string File for deleting
+     * @return mixed
+     */
     public function delete($filename);
 }
