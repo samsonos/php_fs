@@ -10,14 +10,6 @@ namespace samson\fs;
 interface IAdapter
 {
     /**
-     * Adapter initialization
-     * @param mixed $params collection or parameter for initialization of adapter.
-     *                      This depends on adapter implementation.
-     * @return mixed True if adapter successfully initialized
-     */
-    public function init($params);
-
-    /**
      * Write data to a specific relative location
      *
      * @param mixed $data Data to be written
@@ -49,7 +41,7 @@ interface IAdapter
      * @param $uploadDir string
      * @return mixed
      */
-    public function writeFile($filePath, $filename, $uploadDir);
+    public function copy($filePath, $filename, $uploadDir);
 
     /**
      * Delete file from current file system
