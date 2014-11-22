@@ -14,7 +14,7 @@ To work with current file system service you should get file system service inst
 /**@var \samson\fs\FileService $fs Pointer to file service */
 $fs = & m('fs');
 ```
-After this you can use all available methods from ```IFileService``` interface which this SamsonPHP file service implements. 
+After this you can use all available methods from ```IFileService``` interface which this SamsonPHP file service(```fs```) implements. 
 All this method call acts like a proxy and passes them to to currently configured file service(by default ```php_fs_local```).
 
 ```php
@@ -23,7 +23,7 @@ if (!$fs->exists(...)) {
 }
 ```
 
-This gives you ability, for example, to quickly change your web-application file system from local file system to Amazon Web Services S3 bucket, which is implemented by [SamsonPHP AWS file service ```php_fs_aws```](http://github.com/samsonos/php_fs_aws). All you have to do is add configuration for SamsonPHP file service(```fs```):
+This gives you ability, for example, to quickly change your web-application file system from local file system to Amazon Web Services S3 bucket, which is implemented by [SamsonPHP AWS file service ```php_fs_aws```](http://github.com/samsonos/php_fs_aws). All you have to do is add configuration for this SamsonPHP file service(```fs```):
 ```php
 class FileServiceConfig extends \samson\core\Config 
 {
