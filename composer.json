@@ -1,5 +1,17 @@
 {
 	"name":"samsonos/php_fs",
+    "description": "SamsonPHP file system module",
+    "keywords": [ "filesystem", "samsonphp"],
+    "authors":[
+        {
+            "name":"Vitaly Iegorov",
+            "email":"egorov@samsonos.com"
+        },
+        {
+            "name":"Onysko Pavlo",
+            "email":"onysko@samsonos.com"
+        }
+    ],
 	"require":{
         "samsonos/php_core":"*"
     },
@@ -8,7 +20,7 @@
     "autoload" : {
         "classmap": ["src/"],
         "psr-0": {
-            "samsonos\\upload\\": "src/"
+            "samsonos\\fs\\": "src/"
         }
     }
 }
