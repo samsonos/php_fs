@@ -13,11 +13,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function testInitialize()
     {
         // Create instance
-        $fileService = new FileService(__DIR__.'../');
-
-        // Create local file service instance
-        new \samson\fs\LocalFileService();
-
+        $fileService = new FileService(__DIR__.'../');  
 
         // Initialize method
         $fileService->init(array(''));
