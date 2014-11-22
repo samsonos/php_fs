@@ -13,12 +13,25 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function testInitialize()
     {
         // Create instance
-        $fs = new FileService(__DIR__.'../');
+        $fileService = new FileService(__DIR__.'../');
 
         // Initialize method
-        $fs->init(array());
+        $fileService->init(array(''));
 
         // Perform test
-        $this->assertNotEmpty($fs, 'File service initialization failed');
+        $this->assertNotEmpty($fileService, 'File service initialization failed');
+    }
+
+    /** Test unexisted file service */
+    public function testInitializeUnexistingFileService()
+    {
+        // Create instance
+        $fileService = new FileService(__DIR__.'../');
+
+        // Initialize method
+        $fileService->init(array('fileServiceID' => 'SEX'));
+
+        // Perform test
+        $this->assertNotEmpty($fileService, 'File service initialization failed');
     }
 }
