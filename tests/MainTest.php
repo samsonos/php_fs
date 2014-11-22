@@ -9,6 +9,7 @@ use samson\fs\FileService;
  */
 class EventTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var \samson\fs\FileService Pointer to file service */
     public $fileService;
 
     /** Test service initialization */
@@ -20,7 +21,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Create local service instance
         new \samson\fs\LocalFileService(__DIR__.'../');
 
-        // Initialize method
+        // Initialize service
         $this->fileService->init(array(''));
 
         // Perform test
@@ -36,7 +37,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Set unreal file service class name
         $this->fileService->fileServiceClassName = 'IDoNotExist';
 
-        // Initialize method
+        // Initialize service
         $result = $this->fileService->init(array());
 
         // Perform test
