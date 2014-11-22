@@ -7,7 +7,7 @@ namespace samson\fs;
  *
  * @package samson\upload
  */
-interface IAdapter
+interface IFileSystem
 {
     /**
      * Write data to a specific relative location
@@ -32,7 +32,7 @@ interface IAdapter
      * @param $filename string
      * @return mixed
      */
-    public function read($filePath, $filename);
+    public function read($filePath, $filename = null);
 
     /**
      * Write a file to selected location

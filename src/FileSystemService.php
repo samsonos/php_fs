@@ -13,15 +13,15 @@ use samson\fs\IAdapter;
  * File system module controller
  * @package samson\fs
  */
-class FileSystemController extends \samson\core\CompressableService implements IAdapter
+class FileSystemService extends \samson\core\CompressableService implements IFileSystem
 {
     /** @var string Parameter for configuring file system adapter */
-    public $adapterType = '\samson\fs\LocalAdapter';
+    public $adapterType = '\samson\fs\LocalFSService';
 
     /** @var string Module identifier */
     protected $id = 'fs';
 
-    /** @var \samson\fs\IAdapter Pointer to file system adapter */
+    /** @var \samson\fs\IFileSystem Pointer to file system adapter */
     protected $adapter;
 
     /**
@@ -77,7 +77,7 @@ class FileSystemController extends \samson\core\CompressableService implements I
      * @param $filename string
      * @return mixed
      */
-    public function read($filePath, $filename)
+    public function read($filePath, $filename = null)
     {
         return $this->adapter->read($filePath, $filename);
     }
