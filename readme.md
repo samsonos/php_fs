@@ -19,8 +19,7 @@ After this you can use all available methods from ```IFileService``` interface w
 All this method call acts like a proxy and pass this call to currently configured file service(by default ```fs_local```).
 
 This gives you ability, for example, to quickly change your file system from local file system to Amazon Web Services S3 bucket,
-which is implemented by [SamsonPHP AWS file service ```fs_aws```](http://github.com/samsonos/php_fs_aws). All you have to do is 
-add configuration fo SamsonPHP file service(```fs```):
+which is implemented by [SamsonPHP AWS file service ```php_fs_aws```](http://github.com/samsonos/php_fs_aws). All you have to do is add configuration fo SamsonPHP file service(```fs```):
 ```php
 class FileServiceConfig extends \samson\core\Config 
 {
