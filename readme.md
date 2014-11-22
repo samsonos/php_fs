@@ -33,7 +33,7 @@ To work with this SamsonPHP file service you should get file service instance po
 /**@var \samson\fs\FileService $fs Pointer to file service */
 $fs = & m('fs');
 ```
-After this you can use all available methods from ```IFileService``` interface, which this SamsonPHP file service(```fs```) implements. 
+After this you can use all available methods from [```IFileService``` interface](https://github.com/samsonos/php_fs/blob/master/src/IFileSystem.php), which this SamsonPHP file service(```fs```) implements. 
 All this method call act like a proxy and passes them to currently configured file service(by default ```php_fs_local```).
 
 Example usage:
