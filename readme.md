@@ -1,13 +1,17 @@
 #SamsonPHP File service 
 
 This module gives abstraction for working with files independently
-of file system being used. The main goal is to configure the ```$fileServiceID```
+of file system being used. 
+
+##Configuration 
+
+The main goal is to configure the ```$fileServiceID```
 service parameter. 
 
-This is done using [SamsonPHP module/service configuration](https://github.com/samsonos/php_core/wiki/0.3-Configurating)
+This is usually done using [SamsonPHP module/service configuration](https://github.com/samsonos/php_core/wiki/0.3-Configurating)
 
-By default ```$fileServiceID``` is set to ```fs_local``` - uses standart local file
-system service which is implemented in [SamsonPHP local file service ```php_fs_local```](http://github.com/samsonos/php_fs_local). This parameter has to be set to file service identifier, for local file service - ```fs_local```.
+By default ```$fileServiceID``` is set to ```fs_local``` - it uses standart local file
+system service which is implemented in [SamsonPHP local file service ```php_fs_local```](http://github.com/samsonos/php_fs_local). This parameter has to be set to file service identifier, for local file service - ```fs_local```, no class names or anything else. When service is initialized it checks if configured file service is present in web-application otherwise fatal error is signaled.
 
 To work with current file system service you should get file system service instance pointer:
 ```php
@@ -36,3 +40,5 @@ class FileServiceConfig extends \samson\core\Config
 ```
 
 > All other SamsonPHP modules must and use this file service approach when working with files.
+
+#
