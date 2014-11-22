@@ -1,4 +1,4 @@
-#SamsonPHP File service 
+#SamsonPHP File service  [![Latest Stable Version](https://poser.pugx.org/samsonos/php_fs/v/stable.svg)](https://packagist.org/packages/samsonos/php_fs) [![Build Status](https://travis-ci.org/samsonos/php_fs.png)](https://travis-ci.org/samsonos/php_fs) [![Coverage Status](https://coveralls.io/repos/samsonos/php_fs/badge.png)](https://coveralls.io/r/samsonos/php_fs) [![Code Climate](https://codeclimate.com/github/samsonos/php_fs/badges/gpa.svg)](https://codeclimate.com/github/samsonos/php_fs) [![Total Downloads](https://poser.pugx.org/samsonos/php_fs/downloads.svg)](https://packagist.org/packages/samsonos/php_fs)
 
 This module gives abstraction level for working with file system independently
 of what exact file system is being used. 

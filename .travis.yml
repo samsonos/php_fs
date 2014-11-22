@@ -10,8 +10,7 @@ before_script:
 
 script:
  - mkdir -p build/logs
- - phpunit --verbose --debug
- - phpunit --coverage-clover build/logs/clover.xml
+ - phpunit --verbose --debug --coverage-clover build/logs/clover.xml
 
 after_script:
  - vendor/bin/coveralls -v
