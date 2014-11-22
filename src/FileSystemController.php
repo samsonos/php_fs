@@ -15,8 +15,34 @@ use samson\fs\IAdapter;
  */
 class FileSystemController extends \samson\core\CompressableExternalService implements IAdapter
 {
+    /** @var string Parameter for configuring file system adapter */
+    public $adapterType = '\samson\fs\LocalAdapter';
+
     /** @var string Module identifier */
     protected $id = 'fs';
+
+    /** @var \samson\fs\IAdapter Pointer to file system adapter */
+    protected $adapter;
+
+    /**
+     * Initialize module
+     * @param array $params Collection of module parameters
+     * @return bool True if module successfully initialized
+     */
+    public function init(array $params = array())
+    {
+        // If defined adapter is not supported
+        if (class_exists($this->adapterType)) {
+            // Signal error
+            return e('Cannot initialize file system adapter[##], class is not found', E_SAMSON_CORE_ERROR, $this->adapterType);
+        }
+
+        // Create adapter instance and pass all its possible parameters
+        $this->adapter = new $this->adapterType();
+
+        // Call parent initialization
+        parent::init($params);
+    }
 
     /**
      * Write data to a specific relative location
