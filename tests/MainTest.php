@@ -9,33 +9,32 @@ use samson\fs\FileService;
  */
 class EventTest extends \PHPUnit_Framework_TestCase
 {
+    public $fileService;
+
     /** Test service initialization */
     public function testInitialize()
     {
         // Create instance
-        $fileService = new FileService(__DIR__.'../');
+        $this->fileService = new FileService(__DIR__.'../');
 
         // Create local service instance
         new \samson\fs\LocalFileService(__DIR__.'../');
 
         // Initialize method
-        $fileService->init(array(''));
+        $this->fileService->init(array(''));
 
         // Perform test
-        $this->assertNotEmpty($fileService, 'File service initialization failed');
+        $this->assertNotEmpty($this->fileService, 'File service initialization failed');
     }
 
     /** Test unreal file service */
     public function testInitializeUnrealFileService()
     {
-        // Create instance
-        $fileService = new FileService(__DIR__.'../');
-
         // Set unreal file service class name
-        $fileService->fileServiceClassName = 'IDoNotExist';
+        $this->fileService->fileServiceClassName = 'IDoNotExist';
 
         // Initialize method
-        $result = $fileService->init(array());
+        $result = $this->fileService->init(array());
 
         // Perform test
         $this->assertTrue($result, 'File service initialization failed');
