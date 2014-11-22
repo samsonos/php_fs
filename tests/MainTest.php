@@ -15,6 +15,11 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Create instance
         $fileService = new FileService(__DIR__.'../');
 
+        // Create local file service instance
+        if (!class_exists('samson\fs\LocalFileService')) {
+            new samson\fs\LocalFileService();
+        }
+
         // Initialize method
         $fileService->init(array(''));
 
