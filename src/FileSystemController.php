@@ -58,7 +58,7 @@ class FileSystemController extends \samson\core\CompressableExternalService impl
      */
     public function write($data, $filename = '', $uploadDir = '')
     {
-        // TODO: Implement write() method.
+        return $this->adapter->write($data, $filename, $uploadDir);
     }
 
     /**
@@ -68,7 +68,7 @@ class FileSystemController extends \samson\core\CompressableExternalService impl
      */
     public function exists($filename)
     {
-        // TODO: Implement exists() method.
+        return $this->adapter->exists($filename);
     }
 
     /**
@@ -79,7 +79,7 @@ class FileSystemController extends \samson\core\CompressableExternalService impl
      */
     public function read($filePath, $filename)
     {
-        // TODO: Implement read() method.
+        return $this->adapter->read($filePath, $filename);
     }
 
     /**
@@ -89,7 +89,7 @@ class FileSystemController extends \samson\core\CompressableExternalService impl
      */
     public function delete($filename)
     {
-        // TODO: Implement delete() method.
+        return $this->adapter->delete($filename);
     }
 
     /**
@@ -101,6 +101,6 @@ class FileSystemController extends \samson\core\CompressableExternalService impl
      */
     public function copy($filePath, $filename, $uploadDir)
     {
-        // TODO: Implement copy() method.
+        return $this->adapter->copy($filePath, $filename, $uploadDir);
     }
 }
