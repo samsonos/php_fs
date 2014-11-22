@@ -17,8 +17,8 @@ use samson\fs\IFileSystem;
  */
 class FileService extends CompressableService implements IFileSystem
 {
-    /** @var string Configurable file service identifier */
-    public $fileServiceID = 'fs_local';
+    /** @var string Configurable file service class name */
+    public $fileServiceClassName = 'samson\fs\LocalFileService';
 
     /** @var string Module identifier */
     protected $id = 'fs';
@@ -33,18 +33,18 @@ class FileService extends CompressableService implements IFileSystem
      */
     public function init(array $params = array())
     {
-        // Set pointer to file service service
-        $this->fileService = & Module::$instances[$this->fileServiceID];
-
         // If defined file service is not supported
-        if (!isset($this->fileService)) {
+        if (!class_exists($this->fileServiceClassName)) {
             // Signal error
             return e(
                 'Cannot initialize file system adapter[##], class is not found',
                 E_SAMSON_CORE_ERROR,
-                $this->fileServiceID
+                $this->fileServiceClassName
             );
+        } else { // Get service instance by
+            $this->fileService = \samson\core\Service::getInstance($this->fileServiceClassName);
         }
+
 
         // Call parent initialization
         return parent::init($params);

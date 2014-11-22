@@ -11,8 +11,12 @@ service parameter.
 This is usually done using [SamsonPHP module/service configuration](https://github.com/samsonos/php_core/wiki/0.3-Configurating)
 
 By default ```$fileServiceID``` is set to ```fs_local``` - it uses standart local file
-system service which is implemented by [SamsonPHP local file service ```php_fs_local```](http://github.com/samsonos/php_fs_local). This parameter has to be set to file service identifier, for example - local file service - ```fs_local```, no class names or anything else should be used. 
-> When service is initialized it checks if configured file service is present in web-application otherwise fatal error is signaled, the search is made via module/service identifiers.
+system service which is implemented by [SamsonPHP local file service ```php_fs_local```](http://github.com/samsonos/php_fs_local). This parameter has to be set to file service class name, for example - local file service - ```samson\fs\LocalFileService```, no module/service identifiers or anything else should be used,
+ first namespace separator ```\``` should be avoided too:
+  * ```\samson\fs\LocalFileService``` - incorrect
+  * ```samson\fs\LocalFileService``` - correct
+  
+> When service is initialized it checks if configured file service class is present otherwise fatal error is signaled.
 
 This gives you ability, for example, to quickly change your web-application file system from local file system to Amazon Web Services S3 bucket, which is implemented by [SamsonPHP AWS file service ```php_fs_aws```](http://github.com/samsonos/php_fs_aws). All you have to do is add configuration for this SamsonPHP file service(```fs```):
 ```php
