@@ -32,9 +32,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $fileService->fileServiceClassName = 'IDoNotExist';
 
         // Initialize method
-        $fileService->init(array());
+        $result = $fileService->init(array());
 
         // Perform test
-        $this->assertNotEmpty($fileService, 'File service initialization failed');
+        $this->assertTrue($result, 'File service initialization failed');
     }
 }
