@@ -34,7 +34,11 @@ class FileSystemController extends \samson\core\CompressableExternalService impl
         // If defined adapter is not supported
         if (class_exists($this->adapterType)) {
             // Signal error
-            return e('Cannot initialize file system adapter[##], class is not found', E_SAMSON_CORE_ERROR, $this->adapterType);
+            return e(
+                'Cannot initialize file system adapter[##], class is not found',
+                E_SAMSON_CORE_ERROR,
+                $this->adapterType
+            );
         }
 
         // Create adapter instance and pass all its possible parameters
