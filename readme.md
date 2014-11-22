@@ -11,7 +11,7 @@ system service which is implemented in [SamsonPHP local file service ```php_fs_l
 
 To work with current file system service you should get file system service instance pointer:
 ```php
-/** \samson\fs\FileService Pointer to file service */
+/**@var \samson\fs\FileService $fs Pointer to file service */
 $fs = & m('fs');
 ```
 
