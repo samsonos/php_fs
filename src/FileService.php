@@ -34,7 +34,7 @@ class FileService extends CompressableService implements IFileSystem
     public function init(array $params = array())
     {
         // If defined file service is not supported
-        if (!class_exists($this->fileServiceClassName)) {
+        if (!class_exists($this->fileServiceClassName, false)) {
             // Signal error
             return e(
                 'Cannot initialize file system adapter[##], class is not found',
