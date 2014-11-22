@@ -22,14 +22,17 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($fileService, 'File service initialization failed');
     }
 
-    /** Test unexisted file service */
-    public function testInitializeUnexistingFileService()
+    /** Test unreal file service */
+    public function testInitializeUnrealFileService()
     {
         // Create instance
         $fileService = new FileService(__DIR__.'../');
 
+        // Set unreal file service class name
+        $fileService->fileServiceClassName = 'IDoNotExist';
+
         // Initialize method
-        $fileService->init(array('fileServiceID' => 'SEX'));
+        $fileService->init(array());
 
         // Perform test
         $this->assertNotEmpty($fileService, 'File service initialization failed');
