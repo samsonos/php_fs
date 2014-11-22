@@ -13,10 +13,10 @@ use samson\fs\IAdapter;
  * File system module controller
  * @package samson\fs
  */
-class FileSystemService extends \samson\core\CompressableService implements IFileSystem
+class FileService extends \samson\core\CompressableService implements IFileSystem
 {
-    /** @var string File service identifier */
-    public $adapterType = 'fs_local';
+    /** @var string Configurable file service identifier */
+    public $fileServiceID = 'fs_local';
 
     /** @var string Module identifier */
     protected $id = 'fs';
@@ -32,7 +32,7 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
     public function init(array $params = array())
     {
         // Set pointer to file service service
-        $this->fileService = & \samson\core\Module::$instances[$this->adapterType];
+        $this->fileService = & \samson\core\Module::$instances[$this->fileServiceID];
 
         // If defined file service is not supported
         if (!isset($this->fileService)) {
@@ -101,6 +101,6 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
      */
     public function move($filePath, $filename, $uploadDir)
     {
-        return $this->fileService->copy($filePath, $filename, $uploadDir);
+        return $this->fileService->move($filePath, $filename, $uploadDir);
     }
 }
