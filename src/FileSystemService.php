@@ -15,14 +15,14 @@ use samson\fs\IAdapter;
  */
 class FileSystemService extends \samson\core\CompressableService implements IFileSystem
 {
-    /** @var string Parameter for configuring file system adapter */
-    public $adapterType = '\samson\fs\LocalFSService';
+    /** @var string File service identifier */
+    public $adapterType = 'fs_local';
 
     /** @var string Module identifier */
     protected $id = 'fs';
 
     /** @var \samson\fs\IFileSystem Pointer to file system adapter */
-    protected $adapter;
+    protected $fileService;
 
     /**
      * Initialize module
@@ -31,8 +31,11 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
      */
     public function init(array $params = array())
     {
-        // If defined adapter is not supported
-        if (class_exists($this->adapterType)) {
+        // Set pointer to file service service
+        $this->fileService = & \samson\core\Module::$instances[$this->adapterType];
+
+        // If defined file service is not supported
+        if (!isset($this->fileService)) {
             // Signal error
             return e(
                 'Cannot initialize file system adapter[##], class is not found',
@@ -40,9 +43,6 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
                 $this->adapterType
             );
         }
-
-        // Create adapter instance and pass all its possible parameters
-        $this->adapter = new $this->adapterType();
 
         // Call parent initialization
         parent::init($params);
@@ -58,7 +58,7 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
      */
     public function write($data, $filename = '', $uploadDir = '')
     {
-        return $this->adapter->write($data, $filename, $uploadDir);
+        return $this->fileService->write($data, $filename, $uploadDir);
     }
 
     /**
@@ -68,7 +68,7 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
      */
     public function exists($filename)
     {
-        return $this->adapter->exists($filename);
+        return $this->fileService->exists($filename);
     }
 
     /**
@@ -79,7 +79,7 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
      */
     public function read($filePath, $filename = null)
     {
-        return $this->adapter->read($filePath, $filename);
+        return $this->fileService->read($filePath, $filename);
     }
 
     /**
@@ -89,7 +89,7 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
      */
     public function delete($filename)
     {
-        return $this->adapter->delete($filename);
+        return $this->fileService->delete($filename);
     }
 
     /**
@@ -101,6 +101,6 @@ class FileSystemService extends \samson\core\CompressableService implements IFil
      */
     public function move($filePath, $filename, $uploadDir)
     {
-        return $this->adapter->copy($filePath, $filename, $uploadDir);
+        return $this->fileService->copy($filePath, $filename, $uploadDir);
     }
 }
