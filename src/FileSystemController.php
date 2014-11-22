@@ -13,7 +13,7 @@ use samson\fs\IAdapter;
  * File system module controller
  * @package samson\fs
  */
-class FileSystemController extends \samson\core\CompressableExternalService implements IAdapter
+class FileSystemController extends \samson\core\CompressableService implements IAdapter
 {
     /** @var string Parameter for configuring file system adapter */
     public $adapterType = '\samson\fs\LocalAdapter';
@@ -99,7 +99,7 @@ class FileSystemController extends \samson\core\CompressableExternalService impl
      * @param $uploadDir string
      * @return mixed
      */
-    public function copy($filePath, $filename, $uploadDir)
+    public function move($filePath, $filename, $uploadDir)
     {
         return $this->adapter->copy($filePath, $filename, $uploadDir);
     }

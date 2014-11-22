@@ -41,7 +41,7 @@ interface IAdapter
      * @param $uploadDir string
      * @return mixed
      */
-    public function copy($filePath, $filename, $uploadDir);
+    public function move($filePath, $filename, $uploadDir);
 
     /**
      * Delete file from current file system
