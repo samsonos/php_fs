@@ -28,14 +28,15 @@ class FileServiceConfig extends \samson\core\Config
 
 ## Usage
 
-To work with current file system service you should get file system service instance pointer:
+To work with this SamsonPHP file service you should get file service instance pointer:
 ```php
 /**@var \samson\fs\FileService $fs Pointer to file service */
 $fs = & m('fs');
 ```
-After this you can use all available methods from ```IFileService``` interface which this SamsonPHP file service(```fs```) implements. 
-All this method call acts like a proxy and passes them to to currently configured file service(by default ```php_fs_local```).
+After this you can use all available methods from ```IFileService``` interface, which this SamsonPHP file service(```fs```) implements. 
+All this method call act like a proxy and passes them to currently configured file service(by default ```php_fs_local```).
 
+Example usage:
 ```php
 if (!$fs->exists(...)) {
   $fs->write(...);
