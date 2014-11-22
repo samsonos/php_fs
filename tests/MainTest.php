@@ -30,6 +30,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** Test unreal file service */
     public function testInitializeUnrealFileService()
     {
+        // Get instance using services factory as error will signal other way
         $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
 
         // Set unreal file service class name
