@@ -43,4 +43,36 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Perform test
         $this->assertFalse($result, 'File service initialization not failed as expected');
     }
+
+    /** Test reading */
+    public function testRead()
+    {
+        // Get instance using services factory as error will signal other way
+        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
+
+        // Read current file data
+        $data = $this->fileService->read(__FILE__);
+
+        // Compare current file with data readed
+        $this->assertStringEqualsFile(__FILE__, $data, 'File service read failed');
+    }
+
+    /** Test file service writing and reading */
+    public function testWriteRead()
+    {
+        // Get instance using services factory as error will signal other way
+        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
+
+        // Create temporary file
+        $path = tempnam(sys_get_temp_dir(), 'test');
+
+        // Write data to temporary file
+        $this->fileService->write('123', $path);
+
+        // Read data from file
+        $data = $this->fileService->read($path);
+
+        // Perform test
+        $this->assertEquals('123', $data, 'File service writing failed');
+    }
 }
