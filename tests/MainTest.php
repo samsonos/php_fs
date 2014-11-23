@@ -118,7 +118,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $path = tempnam(sys_get_temp_dir(), 'test');
 
         // Create test dir
-        $testDir = sys_get_temp_dir().'testDir/';
+        $testDir = sys_get_temp_dir().'/testDir/';
         mkdir($testDir, 0777);
 
         // Move file to a new dir
