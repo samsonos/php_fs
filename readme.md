@@ -3,7 +3,7 @@
 This module gives abstraction level for working with file system independently
 of what exact file system is being used. 
 
-##Configuration 
+##Configuration  
 
 The main goal is to configure the ```$fileServiceID```
 service parameter. 
