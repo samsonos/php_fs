@@ -86,7 +86,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $path = tempnam(sys_get_temp_dir(), 'test');
 
         // Delete temporary file
-        $this->fileService->delete('123', $path);
+        $this->fileService->delete($path);
 
         // Perform test
         $this->assertFileExists($path, 'File service deleting failed');
@@ -124,12 +124,8 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Move file to a new dir
         $newPath = $this->fileService->move($path, basename($path), $testDir);
 
-        // Test files existence
-        $existsMoved = $this->fileService->exists($newPath);
-        $existsOld = $this->fileService->exists($newPath);
-
         // Perform test
-        $this->assertEquals(true, $existsMoved, 'File service move failed - Moved file not found');
-        $this->assertEquals(false, $existsOld, 'File service move failed - Original file is not deleted');
+        $this->assertFileExists($newPath, 'File service move failed - Moved file not found');
+        $this->assertFileNotExists($existsOld, 'File service move failed - Original file is not deleted');
     }
 }
