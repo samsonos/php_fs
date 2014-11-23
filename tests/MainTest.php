@@ -126,6 +126,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         // Perform test
         $this->assertFileExists($newPath, 'File service move failed - Moved file not found');
-        $this->assertFileNotExists($existsOld, 'File service move failed - Original file is not deleted');
+        $this->assertFileNotExists($path, 'File service move failed - Original file is not deleted');
     }
 }
