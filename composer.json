@@ -1,7 +1,7 @@
 {
 	"name":"samsonos/php_fs",
-    "description": "SamsonPHP file system module",
-    "keywords": [ "filesystem", "samsonphp"],
+    "description": "SamsonPHP file system service",
+    "keywords": [ "file system", "samsonphp"],
     "authors":[
         {
             "name":"Vitaly Iegorov",
