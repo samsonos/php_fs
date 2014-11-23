@@ -53,4 +53,16 @@ if (!$fs->exists(...)) {
 }
 ```
 
+### Using service in tests
+First of all you should create service instance:
+```php
+// Create instance
+$this->fileService = new FileService(__DIR__.'../');
+```
+In other places called after service creation you should retrieve service object via factory method:
+```php
+// Get instance using services factory as error will signal other way
+$this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
+```
+
 > All other SamsonPHP modules must and use this file service approach when working with files.
