@@ -89,7 +89,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->fileService->delete($path);
 
         // Perform test
-        $this->assertFileExists($path, 'File service deleting failed');
+        $this->assertFileNotExists($path, 'File service deleting failed');
     }
 
     /** Test file service existing */
