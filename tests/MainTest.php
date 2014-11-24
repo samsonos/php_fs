@@ -12,15 +12,20 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** @var \samson\fs\FileService Pointer to file service */
     public $fileService;
 
-    /** Test service initialization */
-    public function testInitialize()
+    /** Tests init */
+    public function setUp()
     {
-        // Create instance
-        $this->fileService = new FileService(__DIR__.'../');
+        // Get instance using services factory as error will signal other way
+        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
 
         // Create local service instance
         new \samson\fs\LocalFileService(__DIR__.'../');
 
+    }
+
+    /** Test service initialization */
+    public function testInitialize()
+    {
         // Initialize service
         $this->fileService->init(array(''));
 
@@ -31,9 +36,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** Test unreal file service */
     public function testInitializeUnrealFileService()
     {
-        // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
-
         // Set unreal file service class name
         $this->fileService->fileServiceClassName = 'IDoNotExist';
 
@@ -47,9 +49,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** Test reading */
     public function testRead()
     {
-        // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
-
         // Read current file data
         $data = $this->fileService->read(__FILE__);
 
@@ -60,9 +59,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** Test file service writing and reading */
     public function testWriteRead()
     {
-        // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
-
         // Create temporary file
         $path = tempnam(sys_get_temp_dir(), 'test');
 
@@ -79,9 +75,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** Test file service deleting */
     public function testDelete()
     {
-        // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
-
         // Create temporary file
         $path = tempnam(sys_get_temp_dir(), 'test');
 
@@ -95,9 +88,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** Test file service existing */
     public function testExists()
     {
-        // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
-
         // Create temporary file
         $path = tempnam(sys_get_temp_dir(), 'test');
 
@@ -111,9 +101,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** Test file service moving */
     public function testMove()
     {
-        // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
-
         // Create temporary file
         $path = tempnam(sys_get_temp_dir(), 'test');
 
@@ -127,5 +114,15 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Perform test
         $this->assertFileExists($newPath, 'File service move failed - Moved file not found');
         $this->assertFileNotExists($path, 'File service move failed - Original file is not deleted');
+    }
+
+    /** Test file service extension method */
+    public function testExtension()
+    {
+        // Move file to a new dir
+        $extension = $this->fileService->extension(__FILE__);
+
+        // Perform test
+        $this->assertEquals('php', $extension, 'File service extension method failed - Extension is not correct');
     }
 }
