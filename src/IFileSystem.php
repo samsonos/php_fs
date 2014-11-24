@@ -28,9 +28,9 @@ interface IFileSystem
 
     /**
      * Read the file from current file system
-     * @param $filePath string Path to file
-     * @param $filename string
-     * @return mixed
+     * @param $filePath string Full path to file
+     * @param $filename string File name
+     * @return string File data
      */
     public function read($filePath, $filename = null);
 
