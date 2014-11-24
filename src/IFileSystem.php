@@ -39,7 +39,7 @@ interface IFileSystem
      * @param $filePath string Path to file
      * @param $filename string
      * @param $uploadDir string
-     * @return mixed
+     * @return bool|string False if failed otherwise path to moved file
      */
     public function move($filePath, $filename, $uploadDir);
 
