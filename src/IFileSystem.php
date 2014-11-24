@@ -49,4 +49,11 @@ interface IFileSystem
      * @return mixed
      */
     public function delete($filename);
+
+    /**
+     * Get file extension in current file system
+     * @param $filePath string Path
+     * @return string|bool false if extension not found, otherwise file extension
+     */
+    public function extension($filePath);
 }

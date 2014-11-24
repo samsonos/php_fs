@@ -1,4 +1,4 @@
-#SamsonPHP File service  
+#SamsonPHP File service
 
 This module gives abstraction level for working with file system independently
 of what exact file system is being used.

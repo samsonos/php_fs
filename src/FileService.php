@@ -105,4 +105,14 @@ class FileService extends CompressableService implements IFileSystem
     {
         return $this->fileService->move($filePath, $filename, $uploadDir);
     }
+
+    /**
+     * Get file extension in current file system
+     * @param $filePath string Path
+     * @return string|bool false if extension not found, otherwise file extension
+     */
+    public function extension($filePath)
+    {
+        return $this->fileService->extension($filePath);
+    }
 }
