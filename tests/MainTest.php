@@ -29,13 +29,13 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function testInitializeUnrealFileService()
     {
         // Set unreal file service class name
-        //$this->fileService->fileServiceClassName = 'IDoNotExist';
+        $this->fileService->fileServiceClassName = 'IDoNotExist';
 
         // Initialize service
-        //$result = $this->fileService->init(array());
+        $result = $this->fileService->init(array());
 
         // Perform test
-        //$this->assertFalse($result, 'File service initialization not failed as expected');
+        $this->assertFalse($result, 'File service initialization not failed as expected');
     }
 
     /** Test reading */
