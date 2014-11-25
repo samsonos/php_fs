@@ -16,11 +16,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
-
-        // Create local service instance
-        new \samson\fs\LocalFileService(__DIR__.'../');
-
+        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');  
     }
 
     /** Test service initialization */
