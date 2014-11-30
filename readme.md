@@ -1,4 +1,5 @@
-#SamsonPHP File service  
+#SamsonPHP File service 
+ 
 This module gives abstraction level for working with file system independently
 of what exact file system is being used.
  
@@ -7,13 +8,14 @@ of what exact file system is being used.
 [![Coverage Status](https://img.shields.io/coveralls/samsonos/php_fs.svg)](https://coveralls.io/r/samsonos/php_fs?branch=master)
 [![Code Climate](https://codeclimate.com/github/samsonos/php_fs/badges/gpa.svg)](https://codeclimate.com/github/samsonos/php_fs) 
 [![Total Downloads](https://poser.pugx.org/samsonos/php_fs/downloads.svg)](https://packagist.org/packages/samsonos/php_fs)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonos/php_fs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonos/php_fs/?branch=master)
 
 ##Configuration  
 
 The main goal is to configure the ```$fileServiceID```
 service parameter. 
 
-This is usually done using [SamsonPHP module/service configuration](https://github.com/samsonos/php_core/wiki/0.3-Configurating)
+This is usually done using [SamsonPHP module/service configuration](https://github.com/samsonos/php_fs/wiki/0.3-Configurating)
 
 By default ```$fileServiceID``` is set to ```fs_local``` - it uses standart local file
 system service which is implemented by [SamsonPHP local file service ```php_fs_local```](http://github.com/samsonos/php_fs_local). This parameter has to be set to file service class name, for example - local file service - ```samson\fs\LocalFileService```, no module/service identifiers or anything else should be used,
