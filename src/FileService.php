@@ -41,7 +41,6 @@ class FileService extends AbstractFileService
             $this->fileService = \samson\core\Service::getInstance($this->fileServiceClassName);
         }
 
-
         // Call parent initialization
         return parent::init($params);
     }

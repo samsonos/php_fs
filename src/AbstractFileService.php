@@ -59,22 +59,26 @@ abstract class AbstractFileService extends CompressableService implements IFileS
 
     /**
      * Copy file to selected location
-     * @param string $filePath      Path to file
-     * @param string $filename      File name
-     * @param string $uploadDir     Relative path to file
+     * @param string $filePath      Source path or file path
+     * @param string $newPath       New path or file path
      * @return bool|string False if failed otherwise path to copied file
      */
-    public function copyPath($filePath, $filename, $uploadDir)
+    public function copyPath($filePath, $newPath)
     {
-        // Build new path
-        $newPath = $uploadDir.'/'.$filename;
-
         // Check if source file exists
         if ($this->exists($filePath)) {
             // If this file is not already exists
             if ($filePath != $newPath) {
-                // Read source file and write to new location
-                $this->write($this->read($filePath, $filename), $newPath);
+                // If this is directory
+                if ($this->isDir($filePath)) {
+                    // Read directory
+                    foreach ($this->dir($filePath) as $file) {
+                        // Read source file and write to new location
+                        $this->write($this->read($file, basename($file)), $newPath);
+                    }
+                } else { // Read source file and write to new location
+                    $this->write($this->read($filePath, basename($newPath)), dirname($newPath));
+                }
 
                 // Return copied file path
                 return $newPath;
