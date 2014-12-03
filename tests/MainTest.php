@@ -101,7 +101,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         mkdir($testDir, 0777);
 
         // Move file to a new dir
-        $newPath = $this->fileService->movePath($path, basename($path), $testDir);
+        $newPath = $this->fileService->movePath($path, $path);
 
         // Perform test
         $this->assertFileExists($newPath, 'File service move failed - Moved file not found');
