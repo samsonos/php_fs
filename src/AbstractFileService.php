@@ -65,7 +65,7 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      */
     public function relativePath($fullPath, $fileName)
     {
-        // Get dir from path and remove file name of it if now dir is present
+        // Get dir from path and remove file name of it if no dir is present
         return str_replace($fileName, '', dirname($fullPath));
     }
 
@@ -115,30 +115,14 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      */
     public function movePath($filePath, $filename, $uploadDir)
     {
-        // Build new path
-        $newPath = $uploadDir.'/'.$filename;
+        // Copy path to a new location
+        if(($newPath = $this->copyPath($filePath, $filename, $uploadDir)) !== false){
+            // Remove current path
+            $this->delete($filePath);
 
-        // Check if source file exists
-        if ($this->exists($filePath)) {
-            // If this file is not already exists
-            if ($filePath != $newPath) {
-                // Copy file to a new location
-                $this->copyPath($filePath, $filename, $uploadDir);
-
-                // Remove current file
-                $this->delete($filePath);
-
-                // Return moved file path
-                return $newPath;
-
-            } else { // Paths matched - nothing must happen
-                return false;
-            }
-        } else { // Source file does not exists - signal error
-          return e('Cannot move file[##] to [##] - Source file does not exists',
-              E_SAMSON_CORE_ERROR,
-              array($filePath, $newPath)
-          );
+            return $newPath;
+        } else { // Copy failed
+            return false;
         }
     }
 }
