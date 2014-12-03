@@ -62,7 +62,15 @@ interface IFileSystem
      * @param int       $maxLevel   Maximum nesting level
      * @param int       $level      Current nesting level of recursion
      * @param array     $restrict   Collection of restricted paths
-     * @return array $path recursive directory listing
+     * @param array     $result   Collection of restricted paths
+     * @return array    $result     Resulting collection used in recursion
      */
-    public function dir($path, $extensions = null, $maxLevel = null, $level = 0, $restrict = array('.git','.svn','.hg', '.settings'));
+    public function dir(
+        $path,
+        $extensions = null,
+        $maxLevel = null,
+        $level = 0,
+        $restrict = array('.git','.svn','.hg', '.settings'),
+        & $result = array()
+    );
 }

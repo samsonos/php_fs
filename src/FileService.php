@@ -116,6 +116,7 @@ class FileService extends AbstractFileService
      * @param int $maxLevel Maximum nesting level
      * @param int $level Current nesting level of recursion
      * @param array $restrict Collection of restricted paths
+     * @param array     $result   Collection of restricted paths
      * @return array $path recursive directory listing
      */
     public function dir(
@@ -123,8 +124,9 @@ class FileService extends AbstractFileService
         $extensions = null,
         $maxLevel = null,
         $level = 0,
-        $restrict = array('.git', '.svn', '.hg', '.settings')
+        $restrict = array('.git', '.svn', '.hg', '.settings'),
+        & $result = array()
     ) {
-        return $this->fileService->dir($path, $extensions, $maxLevel, $level, $restrict);
+        return $this->fileService->dir($path, $extensions, $maxLevel, $level, $restrict, $result);
     }
 }
