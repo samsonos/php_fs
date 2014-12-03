@@ -97,7 +97,7 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      * @param string $uploadDir     Relative path to file
      * @return bool|string False if failed otherwise path to moved file
      */
-    public function move($filePath, $filename, $uploadDir)
+    public function movePath($filePath, $filename, $uploadDir)
     {
         // Build new path
         $newPath = $uploadDir.'/'.$filename;
