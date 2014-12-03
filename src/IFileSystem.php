@@ -35,15 +35,6 @@ interface IFileSystem
     public function read($filePath, $filename = null);
 
     /**
-     * Write a file to selected location
-     * @param $filePath string Path to file
-     * @param $filename string
-     * @param $uploadDir string
-     * @return bool|string False if failed otherwise path to moved file
-     */
-    public function move($filePath, $filename, $uploadDir);
-
-    /**
      * Delete file from current file system
      * @param $filename string File for deleting
      * @return mixed
@@ -56,4 +47,15 @@ interface IFileSystem
      * @return string|bool false if extension not found, otherwise file extension
      */
     public function extension($filePath);
+
+    /**
+     * Get recursive $path listing collection
+     * @param string    $path       Path for listing contents
+     * @param array     $extensions Collection of file extensions to filter
+     * @param int       $maxLevel   Maximum nesting level
+     * @param int       $level      Current nesting level of recursion
+     * @param array     $restrict   Collection of restricted paths
+     * @return array $path recursive directory listing
+     */
+    public function dir($path, $extensions = null, $maxLevel = null, $level = 0, $restrict = array('.git','.svn','.hg', '.settings'));
 }

@@ -7,21 +7,17 @@
  */
 namespace samson\fs;
 
-use samson\core\CompressableService;
-use samson\core\Module;
-use samson\fs\IFileSystem;
-
 /**
  * File system module controller
  * @package samson\fs
  */
-class FileService extends CompressableService implements IFileSystem
+class FileService extends AbstractFileService
 {
-    /** @var string Configurable file service class name */
-    public $fileServiceClassName = 'samson\fs\LocalFileService';
-
     /** @var string Module identifier */
     protected $id = 'fs';
+
+    /** @var string Configurable file service class name */
+    public $fileServiceClassName = 'samson\fs\LocalFileService';
 
     /** @var \samson\fs\IFileSystem Pointer to file system adapter */
     protected $fileService;
@@ -49,7 +45,6 @@ class FileService extends CompressableService implements IFileSystem
         // Call parent initialization
         return parent::init($params);
     }
-
     /**
      * Write data to a specific relative location
      *
@@ -75,9 +70,9 @@ class FileService extends CompressableService implements IFileSystem
 
     /**
      * Read the file from current file system
-     * @param $filePath string Path to file
-     * @param $filename string
-     * @return mixed
+     * @param $filePath string Full path to file
+     * @param $filename string File name
+     * @return string File data
      */
     public function read($filePath, $filename = null)
     {
@@ -95,18 +90,6 @@ class FileService extends CompressableService implements IFileSystem
     }
 
     /**
-     * Write a file to selected location
-     * @param $filePath string Path to file
-     * @param $filename string
-     * @param $uploadDir string
-     * @return mixed
-     */
-    public function move($filePath, $filename, $uploadDir)
-    {
-        return $this->fileService->move($filePath, $filename, $uploadDir);
-    }
-
-    /**
      * Get file extension in current file system
      * @param $filePath string Path
      * @return string|bool false if extension not found, otherwise file extension
@@ -114,5 +97,24 @@ class FileService extends CompressableService implements IFileSystem
     public function extension($filePath)
     {
         return $this->fileService->extension($filePath);
+    }
+
+    /**
+     * Get recursive $path listing collection
+     * @param string $path Path for listing contents
+     * @param array $extensions Collection of file extensions to filter
+     * @param int $maxLevel Maximum nesting level
+     * @param int $level Current nesting level of recursion
+     * @param array $restrict Collection of restricted paths
+     * @return array $path recursive directory listing
+     */
+    public function dir(
+        $path,
+        $extensions = null,
+        $maxLevel = null,
+        $level = 0,
+        $restrict = array('.git', '.svn', '.hg', '.settings')
+    ) {
+        return $this->fileService->dir($path, $extensions, $maxLevel, $level, $restrict);
     }
 }
