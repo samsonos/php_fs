@@ -49,6 +49,13 @@ interface IFileSystem
     public function extension($filePath);
 
     /**
+     * Define if $filePath is directory
+     * @param string $filePath Path
+     * @return boolean Is $path a directory or not
+     */
+    public function isDir($filePath);
+
+    /**
      * Get recursive $path listing collection
      * @param string    $path       Path for listing contents
      * @param array     $extensions Collection of file extensions to filter
