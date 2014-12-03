@@ -58,6 +58,18 @@ abstract class AbstractFileService extends CompressableService implements IFileS
     }
 
     /**
+     * Get relative path from $path
+     * @param string $fullPath  Full file path
+     * @param string $fileName  File name
+     * @return string Relative path to file
+     */
+    public function relativePath($fullPath, $fileName)
+    {
+        // Get dir from path and remove file name of it if now dir is present
+        return str_replace($fileName, '', dirname($fullPath));
+    }
+
+    /**
      * Copy file to selected location
      * @param string $filePath      Source path or file path
      * @param string $newPath       New path or file path
@@ -67,7 +79,7 @@ abstract class AbstractFileService extends CompressableService implements IFileS
     {
         // Check if source file exists
         if ($this->exists($filePath)) {
-            // If this file is not already exists
+            // If we copy to other path
             if ($filePath != $newPath) {
                 // If this is directory
                 if ($this->isDir($filePath)) {
