@@ -12,6 +12,7 @@
             "email":"onysko@samsonos.com"
         }
     ],
+    "minimum-stability":"dev",
 	"require":{
         "samsonos/php_core":"1.*",
         "samsonos/php_fs_local":"1.*"
