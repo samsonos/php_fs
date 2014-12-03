@@ -90,22 +90,52 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $exists, 'File service exists failed');
     }
 
-    /** Test file service moving */
-    public function testMove()
+    /** Test relative path building */
+    public function testRelativePath()
     {
         // Create temporary file
         $path = tempnam(sys_get_temp_dir(), 'test');
+        $fileName = basename($path);
 
         // Create test dir
         $testDir = sys_get_temp_dir().'/testDir/';
         mkdir($testDir, 0777);
 
+        $testDirRelative = $this->fileService->relativePath($testDir, $fileName, sys_get_temp_dir());
+        $this->assertEquals('testDir/', $testDirRelative, 'Directory relative path building failed');
+
+        $testDirRelative = $this->fileService->relativePath($testDir, $fileName);
+        $this->assertEquals('testDir/', $testDirRelative, 'Directory relative path building without basePath failed');
+    }
+
+    /** Test file service copy */
+    public function testCopy()
+    {
+        // Create temporary file
+        $path = tempnam(sys_get_temp_dir(), 'test');
+        $fileName = basename($path);
+
+        // Create test dir
+        $testDir = sys_get_temp_dir().'/testDir/';
+        $testDirRelative = $this->fileService->relativePath($testDir, $fileName, sys_get_temp_dir());
+        mkdir($testDir, 0777);
+
         // Move file to a new dir
-        $newPath = $this->fileService->movePath($path, $path);
+        $newPath = $this->fileService->copyPath($path, $testDir.$fileName);
 
         // Perform test
-        $this->assertFileExists($newPath, 'File service move failed - Moved file not found');
-        $this->assertFileNotExists($path, 'File service move failed - Original file is not deleted');
+        $this->assertFileExists($newPath, 'File service copy failed - Copied file not found');
+
+       /* // Create test dir
+        $testDir2 = sys_get_temp_dir().'/testDir2/';
+        //$testDir2Relative = $this->fileService->relativePath($testDir2, $fileName);
+        mkdir($testDir2, 0777);
+
+        // Move whole dir with new file to a second new dir
+        $newPath = $this->fileService->movePath($testDir, $testDir2);
+
+        // Perform test
+        $this->assertFileExists($testDir2.$testDirRelative.$fileName, 'File service move dir failed - Moved file not found');*/
     }
 
     /** Test file service extension method */

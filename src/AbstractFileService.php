@@ -61,12 +61,17 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      * Get relative path from $path
      * @param string $fullPath  Full file path
      * @param string $fileName  File name
+     * @param string $basePath  Base path, must end WITHOUT '/', if not passed
+     *                          $fullPath one level top directory is used.
      * @return string Relative path to file
      */
-    public function relativePath($fullPath, $fileName)
+    public function relativePath($fullPath, $fileName, $basePath = null)
     {
+        // If no basePath is passed consider that we must go ne level up from $fullPath
+        $basePath = !isset($basePath) ? dirname($fullPath) : $basePath;
+
         // Get dir from path and remove file name of it if no dir is present
-        return str_replace($fileName, '', dirname($fullPath));
+        return str_replace($basePath.'/', '', str_replace($fileName, '', $fullPath));
     }
 
     /**
@@ -81,15 +86,30 @@ abstract class AbstractFileService extends CompressableService implements IFileS
         if ($this->exists($filePath)) {
             // If we copy to other path
             if ($filePath != $newPath) {
+                // Build new relative path
+                $newRelativePath = $this->relativePath($newPath, basename($newPath));
+
                 // If this is directory
                 if ($this->isDir($filePath)) {
                     // Read directory
                     foreach ($this->dir($filePath) as $file) {
+                        // Get file name
+                        $fileName = basename($file);
                         // Read source file and write to new location
-                        $this->write($this->read($file, basename($file)), $newPath);
+                        $this->write(
+                            $this->read($file, $fileName),
+                            $fileName,
+                            $newRelativePath
+                        );
                     }
                 } else { // Read source file and write to new location
-                    $this->write($this->read($filePath, basename($newPath)), dirname($newPath));
+                    // Get file name
+                    $fileName = basename($newPath);
+                    $this->write(
+                        $this->read($filePath, $fileName),
+                        $fileName,
+                        $newRelativePath
+                    );
                 }
 
                 // Return copied file path
@@ -99,7 +119,8 @@ abstract class AbstractFileService extends CompressableService implements IFileS
                 return false;
             }
         } else {
-            return e('Cannot copy file[##] to [##] - Source file does not exists',
+            return e(
+                'Cannot copy file[##] to [##] - Source file does not exists',
                 E_SAMSON_CORE_ERROR,
                 array($filePath, $newPath)
             );
