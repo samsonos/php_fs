@@ -139,6 +139,25 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertFileExists($testDir2.$fileName, 'File service copy folder dir failed - Copied file not found');
     }
 
+    /** Test file service move */
+    public function testMove()
+    {
+        // Create temporary file
+        $path = tempnam(sys_get_temp_dir(), 'test');
+        $fileName = basename($path);
+
+        // Create test dir
+        $testDir = sys_get_temp_dir().'/testDir/';
+        mkdir($testDir, 0777);
+
+        // Move file to a new dir
+        $this->fileService->movePath($path, $testDir.$fileName);
+
+        // Perform test
+        $this->assertFileExists($testDir.$fileName, 'File service move file failed - Moved file not found');
+        $this->assertFileNotExists($path, 'File service move file failed - Source file not deleted');
+    }
+
     /** Test file service extension method */
     public function testExtension()
     {
