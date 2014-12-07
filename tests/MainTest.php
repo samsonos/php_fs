@@ -120,25 +120,23 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         // Create test dir
         $testDir = sys_get_temp_dir().'/testDir/';
-        $testDirRelative = $this->fileService->relativePath($testDir, $fileName, sys_get_temp_dir());
         mkdir($testDir, 0777);
 
         // Move file to a new dir
-        $newPath = $this->fileService->copyPath($path, $testDir.$fileName);
+        $this->fileService->copyPath($path, $testDir.$fileName);
 
         // Perform test
-        $this->assertFileExists($newPath, 'File service copy failed - Copied file not found');
+        $this->assertFileExists($testDir.$fileName, 'File service copy file failed - Copied file not found');
 
-       /* // Create test dir
+        // Create test dir
         $testDir2 = sys_get_temp_dir().'/testDir2/';
-        //$testDir2Relative = $this->fileService->relativePath($testDir2, $fileName);
         mkdir($testDir2, 0777);
 
-        // Move whole dir with new file to a second new dir
-        $newPath = $this->fileService->movePath($testDir, $testDir2);
+        // Copy whole dir with new file to a second new dir
+        $this->fileService->copyPath($testDir, $testDir2);
 
         // Perform test
-        $this->assertFileExists($testDir2.$testDirRelative.$fileName, 'File service move dir failed - Moved file not found');*/
+        $this->assertFileExists($testDir2.$fileName, 'File service copy folder dir failed - Copied file not found');
     }
 
     /** Test file service extension method */

@@ -87,22 +87,23 @@ abstract class AbstractFileService extends CompressableService implements IFileS
     }
 
     /**
-     * Copy file to selected location
+     * Copy file/folder to selected location.
+     * Copy can be performed from file($filePath) to file($newPath),
+     * also copy can be performed from folder($filePath) to folder($newPath),
+     * currently copying from file($filePath) to folder($newPath) is not supported.
+     *
      * @param string $filePath      Source path or file path
      * @param string $newPath       New path or file path
-     * @return string|boolean False if failed otherwise path to copied file
+     * @return boolean False if failed otherwise true if file/folder has been copied
      */
     public function copyPath($filePath, $newPath)
     {
         // Check if source file exists
         if ($this->exists($filePath)) {
-            // If we copy to other path
-            if ($filePath != $newPath) {
-                // Build new relative path
-                $newRelativePath = $this->relativePath($newPath, basename($newPath));
-
-                // If this is directory
-                if ($this->isDir($filePath)) {
+            // If this is directory
+            if ($this->isDir($filePath)) {
+                // Check if we are copying dir - dir
+                if ($this->isDir($newPath)) {
                     // Read directory
                     foreach ($this->dir($filePath) as $file) {
                         // Get file name
@@ -111,25 +112,29 @@ abstract class AbstractFileService extends CompressableService implements IFileS
                         $this->write(
                             $this->read($file, $fileName),
                             $fileName,
-                            $newRelativePath
+                            $newPath
                         );
                     }
-                } else { // Read source file and write to new location
-                    // Get file name
-                    $fileName = basename($newPath);
-                    $this->write(
-                        $this->read($filePath, $fileName),
-                        $fileName,
-                        $newRelativePath
+                } else { // Signal error
+                    return e(
+                        'Cannot copy directory[##] - Destination file specified instead of directory[##]',
+                        E_SAMSON_CORE_ERROR,
+                        array($filePath, $newPath)
                     );
                 }
-
-                // Return copied file path
-                return $newPath;
-
-            } else { // Paths matched nothing must happen
-                return false;
+            } else { // Read source file and write to new location
+                // Get file name
+                $fileName = basename($newPath);
+                // Read and write file
+                $this->write(
+                    $this->read($filePath, $fileName),
+                    $fileName,
+                    dirname($newPath)
+                );
             }
+
+            // Return copied file path
+            return true;
         } else {
             return e(
                 'Cannot copy file[##] to [##] - Source file does not exists',
