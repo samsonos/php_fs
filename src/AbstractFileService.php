@@ -90,7 +90,7 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      * Copy file to selected location
      * @param string $filePath      Source path or file path
      * @param string $newPath       New path or file path
-     * @return string|false False if failed otherwise path to copied file
+     * @return string|boolean False if failed otherwise path to copied file
      */
     public function copyPath($filePath, $newPath)
     {
