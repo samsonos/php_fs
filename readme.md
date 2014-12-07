@@ -5,7 +5,7 @@ of what exact file system is being used.
  
 [![Latest Stable Version](https://poser.pugx.org/samsonos/php_fs/v/stable.svg)](https://packagist.org/packages/samsonos/php_fs) 
 [![Build Status](https://travis-ci.org/samsonos/php_fs.png)](https://travis-ci.org/samsonos/php_fs) 
-[![Coverage Status](https://img.shields.io/coveralls/samsonos/php_fs.svg)](https://coveralls.io/r/samsonos/php_fs?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/samsonos/php_fs/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/samsonos/php_fs/?branch=master)
 [![Code Climate](https://codeclimate.com/github/samsonos/php_fs/badges/gpa.svg)](https://codeclimate.com/github/samsonos/php_fs) 
 [![Total Downloads](https://poser.pugx.org/samsonos/php_fs/downloads.svg)](https://packagist.org/packages/samsonos/php_fs)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonos/php_fs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonos/php_fs/?branch=master)
