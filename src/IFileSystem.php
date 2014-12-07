@@ -12,7 +12,7 @@ interface IFileSystem
     /**
      * Write data to a specific relative location
      *
-     * @param mixed $data Data to be written
+     * @param string $data Data to be written
      * @param string $filename File name
      * @param string $uploadDir Relative file path
      * @return string|boolean Relative path to created file, false if there were errors
@@ -21,7 +21,7 @@ interface IFileSystem
 
     /**
      * Check existing current file in current file system
-     * @param $filename string Filename
+     * @param string $filename string Filename
      * @return boolean File exists or not
      */
     public function exists($filename);
@@ -29,14 +29,14 @@ interface IFileSystem
     /**
      * Read the file from current file system
      * @param $filePath string Full path to file
-     * @param $filename string File name
+     * @param string $filename string File name
      * @return string File data
      */
     public function read($filePath, $filename = null);
 
     /**
      * Delete file from current file system
-     * @param $filename string File for deleting
+     * @param string $filename string File for deleting
      * @return mixed
      */
     public function delete($filename);
