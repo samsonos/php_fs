@@ -9,7 +9,7 @@ before_script:
   - travis_retry composer install --prefer-dist --no-interaction
 
 script:
- - phpunit --verbose --debug --coverage-clover
+ - phpunit --verbose --debug --coverage-clover=coverage.clover
 
 after_script:
  - vendor/bin/coveralls -v
