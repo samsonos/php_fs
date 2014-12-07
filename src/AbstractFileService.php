@@ -52,7 +52,7 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      */
     public static function & getInstance($className)
     {
-        return parent::getInstance($className);
+        return (IFileSystem)parent::getInstance($className);
     }
 
     /**
