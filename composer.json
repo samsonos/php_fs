@@ -15,7 +15,7 @@
     "minimum-stability":"dev",
 	"require":{
         "samsonos/php_core":"1.*",
-        "samsonos/php_fs_local":"1.*"
+        "samsonos/php_fs_local":"*"
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",
