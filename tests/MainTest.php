@@ -149,7 +149,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $fileName2 = basename($path2);
 
         // Copy whole dir to a file
-        $this->fileService->copyPath($path2, $testDir2);
+        $this->fileService->copyPath(dirname($path2), $testDir2.$fileName2);
 
         // Perform test
         $this->assertFileNotExists($testDir2.$fileName2, 'File service copy file to folder failed - Copied file found');
