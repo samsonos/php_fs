@@ -23,6 +23,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         // Initialize service
         $this->fileService->init(array());
+
+        // Disable default error output
+        \samson\core\Error::$OUTPUT = false;
     }
 
     /** Test unreal file service */
