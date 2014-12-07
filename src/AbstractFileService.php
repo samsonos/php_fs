@@ -45,18 +45,6 @@ abstract class AbstractFileService extends CompressableService implements IFileS
     );
 
     /**
-     * Override default service function to meet correct return type requirements.
-     * @see \samson\core\Service::getInstance()
-     *
-     * @param string $className Class name for getting service instance
-     * @return \samson\core\Service File service instance
-     */
-    public static function & getInstance($className)
-    {
-        return parent::getInstance($className);
-    }
-
-    /**
      * Get file mime type in current file system
      * @param $filePath string Path to file
      * @return string|bool false if mime not found, otherwise file mime type
