@@ -122,6 +122,12 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $testDir = sys_get_temp_dir().'/testDir/';
         mkdir($testDir, 0777);
 
+        // Try to null source file
+        $this->fileService->copyPath($path.'TEST', $testDir.$fileName);
+
+        // Perform test
+        $this->assertFileNotExists($testDir.$fileName, 'File service copy file failed - Copied file not found');
+
         // Move file to a new dir
         $this->fileService->copyPath($path, $testDir.$fileName);
 
