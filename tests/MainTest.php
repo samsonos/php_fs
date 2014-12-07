@@ -148,4 +148,14 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Perform test
         $this->assertEquals('php', $extension, 'File service extension method failed - Extension is not correct');
     }
+
+    /** Test file service mime method */
+    public function testMime()
+    {
+        // Move file to a new dir
+        $extension = $this->fileService->mime(__FILE__);
+
+        // Perform test
+        $this->assertEquals('text/x-c++', $extension, 'File service mime type method failed - Mime type is not correct');
+    }
 }

@@ -40,7 +40,8 @@ abstract class AbstractFileService extends CompressableService implements IFileS
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xlsx',
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
         'application/octet-stream' 	=> 'sql',
-        'audio/mpeg'	=> 'mp3'
+        'audio/mpeg'	=> 'mp3',
+        'text/x-c++'    => 'php',
     );
 
     /**
@@ -63,7 +64,7 @@ abstract class AbstractFileService extends CompressableService implements IFileS
     public function mime($filePath)
     {
         // Get file extension from path
-        $extension = $this->exists($filePath);
+        $extension = $this->extension($filePath);
 
         // Search mimes array and return mime for file otherwise false
         return array_search($extension, self::$mimes);
