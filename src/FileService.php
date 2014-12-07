@@ -19,7 +19,7 @@ class FileService extends AbstractFileService
     /** @var string Configurable file service class name */
     public $fileServiceClassName = 'samson\fs\LocalFileService';
 
-    /** @var \samson\fs\IFileSystem Pointer to file system adapter */
+    /** @var \samson\fs\AbsctractFileService Pointer to file system adapter */
     protected $fileService;
 
     /**
