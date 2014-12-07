@@ -15,7 +15,7 @@
     "minimum-stability":"dev",
 	"require":{
         "samsonos/php_core":"1.*",
-        "samsonos/php_fs_local":"*"
+        "samsonos/php_fs_local":"1.*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.*"
