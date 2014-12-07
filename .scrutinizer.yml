@@ -10,6 +10,5 @@ filter:
 build:
     environment:
         php:
-            version:
-              - 5.5
-              - 5.3
+            version: 5.5
+
