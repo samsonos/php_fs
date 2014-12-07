@@ -48,11 +48,11 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      * @see \samson\core\Service::getInstance()
      *
      * @param string $className Class name for getting service instance
-     * @return IFileSystem File service instance
+     * @return \samson\fs\IFileSystem File service instance
      */
     public static function & getInstance($className)
     {
-        return (IFileSystem)parent::getInstance($className);
+        return parent::getInstance($className);
     }
 
     /**
