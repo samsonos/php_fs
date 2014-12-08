@@ -98,13 +98,16 @@ abstract class AbstractFileService implements IFileSystem
                     $newPath
                 );
             }
-        } else { // Signal error
-            return e(
-                'Cannot copy directory[##] - Destination file specified instead of directory[##]',
-                E_SAMSON_CORE_ERROR,
-                array($filePath, $newPath)
-            );
+
+            return true;
         }
+
+        // Signal error
+        return e(
+            'Cannot copy directory[##] - Destination file specified instead of directory[##]',
+            E_SAMSON_CORE_ERROR,
+            array($filePath, $newPath)
+        );
     }
 
     /**
@@ -130,13 +133,15 @@ abstract class AbstractFileService implements IFileSystem
                 dirname($newPath)
             );
 
-        } else { // Signal error
-            return e(
-                'Cannot copy file[##] - Destination folder specified instead of file[##]',
-                E_SAMSON_CORE_ERROR,
-                array($filePath, $newPath)
-            );
+            return true;
         }
+
+        // Signal error
+        return e(
+            'Cannot copy file[##] - Destination folder specified instead of file[##]',
+            E_SAMSON_CORE_ERROR,
+            array($filePath, $newPath)
+        );
     }
 
     /**
