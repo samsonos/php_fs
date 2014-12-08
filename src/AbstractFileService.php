@@ -74,14 +74,14 @@ abstract class AbstractFileService implements IFileSystem
     }
 
     /**
-     * Copy file/folder to selected location.
+     * Copy folder to selected location.
      * Copy can be performed from file($filePath) to file($newPath),
      * also copy can be performed from folder($filePath) to folder($newPath),
      * currently copying from file($filePath) to folder($newPath) is not supported.
      *
      * @param string $filePath      Source path or file path
      * @param string $newPath       New path or file path
-     * @return boolean False if failed otherwise true if file/folder has been copied
+     * @return bool|null False if failed otherwise true if file/folder has been copied
      */
     protected function copyFolder($filePath, $newPath)
     {
@@ -98,8 +98,6 @@ abstract class AbstractFileService implements IFileSystem
                     $newPath
                 );
             }
-
-            return true;
         } else { // Signal error
             return e(
                 'Cannot copy directory[##] - Destination file specified instead of directory[##]',
@@ -110,14 +108,14 @@ abstract class AbstractFileService implements IFileSystem
     }
 
     /**
-     * Copy file/folder to selected location.
+     * Copy file to selected location.
      * Copy can be performed from file($filePath) to file($newPath),
      * also copy can be performed from folder($filePath) to folder($newPath),
      * currently copying from file($filePath) to folder($newPath) is not supported.
      *
      * @param string $filePath      Source path or file path
      * @param string $newPath       New path or file path
-     * @return boolean False if failed otherwise true if file/folder has been copied
+     * @return bool|null False if failed otherwise true if file/folder has been copied
      */
     protected function copyFile($filePath, $newPath)
     {
@@ -132,7 +130,6 @@ abstract class AbstractFileService implements IFileSystem
                 dirname($newPath)
             );
 
-            return true;
         } else { // Signal error
             return e(
                 'Cannot copy file[##] - Destination folder specified instead of file[##]',

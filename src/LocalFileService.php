@@ -51,9 +51,9 @@ class LocalFileService extends AbstractFileService
      * @param $filename string
      * @return string
      */
-    public function read($fullname, $filename = null)
+    public function read($filePath, $filename = null)
     {
-        return file_get_contents($fullname);
+        return file_get_contents($filePath);
     }
 
     /**
@@ -89,7 +89,6 @@ class LocalFileService extends AbstractFileService
     /**
      * Get recursive $path listing collection
      * @param string $path Path for listing contents
-     * @param array $extensions Collection of file extensions to filter
      * @param int $maxLevel Maximum nesting level
      * @param int $level Current nesting level of recursion
      * @param array $restrict Collection of restricted paths
