@@ -56,6 +56,43 @@ interface IFileSystem
     public function isDir($filePath);
 
     /**
+     * Get file mime type in current file system
+     * @param $filePath string Path to file
+     * @return string|bool false if mime not found, otherwise file mime type
+     */
+    public function mime($filePath);
+
+    /**
+     * Get relative path from $path
+     * @param string $fullPath  Full file path
+     * @param string $fileName  File name
+     * @param string $basePath  Base path, must end WITHOUT '/', if not passed
+     *                          $fullPath one level top directory is used.
+     * @return string Relative path to file
+     */
+    public function relativePath($fullPath, $fileName, $basePath = null);
+
+    /**
+     * Copy file/folder to selected location.
+     * Copy can be performed from file($filePath) to file($newPath),
+     * also copy can be performed from folder($filePath) to folder($newPath),
+     * currently copying from file($filePath) to folder($newPath) is not supported.
+     *
+     * @param string $filePath      Source path or file path
+     * @param string $newPath       New path or file path
+     * @return boolean False if failed otherwise true if file/folder has been copied
+     */
+    public function copy($filePath, $newPath);
+
+    /**
+     * Move file to selected location
+     * @param string $filePath      Source path or file path
+     * @param string $newPath       New path or file path
+     * @return string|false False if failed otherwise path to moved file
+     */
+    public function move($filePath, $newPath);
+
+    /**
      * Get recursive $path listing collection
      * @param string    $path       Path for listing contents
      * @param int       $maxLevel   Maximum nesting level

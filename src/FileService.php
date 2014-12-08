@@ -7,11 +7,13 @@
  */
 namespace samson\fs;
 
+use samson\core\CompressableService;
+
 /**
  * File system module controller
  * @package samson\fs
  */
-class FileService extends AbstractFileService
+class FileService extends CompressableService implements IFileSystem
 {
     /** @var string Module identifier */
     protected $id = 'fs';
@@ -19,7 +21,7 @@ class FileService extends AbstractFileService
     /** @var string Configurable file service class name */
     public $fileServiceClassName = 'samson\fs\LocalFileService';
 
-    /** @var \samson\fs\AbsctractFileService Pointer to file system adapter */
+    /** @var \samson\fs\AbstractFileService Pointer to file system adapter */
     protected $fileService;
 
     /**
@@ -37,8 +39,17 @@ class FileService extends AbstractFileService
                 E_SAMSON_CORE_ERROR,
                 $this->fileServiceClassName
             );
-        } else { // Get service instance by
-            $this->fileService = AbstractFileService::getInstance($this->fileServiceClassName);
+        } else { // Create file service instance
+            $this->fileService = new $this->fileServiceClassName();
+        }
+
+        // Configuration section
+        // Iterate all available current service variables
+        foreach (get_object_vars($this) as $var => $value) {
+            // Pass variable to object
+            if (property_exists($this->fileService, $var)) {
+                $this->fileService->$var = $value;
+            }
         }
 
         // Call parent initialization

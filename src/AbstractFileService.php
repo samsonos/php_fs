@@ -7,14 +7,12 @@
  */
 namespace samson\fs;
 
-use samson\core\CompressableService;
-
 /**
  * Abstract IFileService implementation
  * with higher level functions implemented
  * @package samson\fs
  */
-abstract class AbstractFileService extends CompressableService implements IFileSystem
+abstract class AbstractFileService implements IFileSystem
 {
     /** @var array Collection of mime => extension */
     public static $mimes = array
@@ -150,7 +148,7 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      * @param string $newPath       New path or file path
      * @return boolean False if failed otherwise true if file/folder has been copied
      */
-    public function copyPath($filePath, $newPath)
+    public function copy($filePath, $newPath)
     {
         // Check if source file exists
         if ($this->exists($filePath)) {
@@ -178,10 +176,10 @@ abstract class AbstractFileService extends CompressableService implements IFileS
      * @param string $newPath       New path or file path
      * @return string|false False if failed otherwise path to moved file
      */
-    public function movePath($filePath, $newPath)
+    public function move($filePath, $newPath)
     {
         // Copy path to a new location
-        if (($this->copyPath($filePath, $newPath)) !== false) {
+        if (($this->copy($filePath, $newPath)) !== false) {
             // Remove current path
             $this->delete($filePath);
 

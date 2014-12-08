@@ -2,6 +2,7 @@
 namespace tests;
 
 use samson\fs\FileService;
+use samson\fs\LocalFileService;
 
 /**
  * Created by Vitaly Iegorov <egorov@samsonos.com>
@@ -9,36 +10,17 @@ use samson\fs\FileService;
  */
 class EventTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \samson\fs\FileService Pointer to file service */
+    /** @var \samson\fs\LocalFileService Pointer to file service */
     public $fileService;
 
     /** Tests init */
     public function setUp()
     {
         // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
-
-        // Set real file service class name
-        $this->fileService->fileServiceClassName = 'samson\fs\LocalFileService';
-
-        // Initialize service
-        $this->fileService->init(array());
+        $this->fileService = \samson\core\Service::getInstance('samson\fs\LocalFileService');
 
         // Disable default error output
         \samson\core\Error::$OUTPUT = false;
-    }
-
-    /** Test unreal file service */
-    public function testInitializeUnrealFileService()
-    {
-        // Set unreal file service class name
-        $this->fileService->fileServiceClassName = 'IDoNotExist';
-
-        // Initialize service
-        $result = $this->fileService->init(array());
-
-        // Perform test
-        $this->assertFalse($result, 'File service initialization not failed as expected');
     }
 
     /** Test reading */
@@ -58,10 +40,13 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $path = tempnam(sys_get_temp_dir(), 'test');
 
         // Write data to temporary file
-        $this->fileService->write('123', $path);
+        $this->fileService->write('123', basename($path), sys_get_temp_dir());
 
         // Read data from file
         $data = $this->fileService->read($path);
+
+        // Write data to null temporary file
+        $this->fileService->write('123', basename($path).'TEST', sys_get_temp_dir().'test');
 
         // Perform test
         $this->assertEquals('123', $data, 'File service writing failed');
@@ -86,11 +71,14 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Create temporary file
         $path = tempnam(sys_get_temp_dir(), 'test');
 
-        // Write data to temporary file
+        // Check if path exists
         $exists = $this->fileService->exists($path);
+        $notExists = $this->fileService->exists($path.'TEST');
 
         // Perform test
         $this->assertEquals(true, $exists, 'File service exists failed');
+        // Perform test
+        $this->assertEquals(false, $notExists, 'File service exists failed');
     }
 
     /** Test relative path building */
@@ -102,7 +90,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         // Create test dir
         $testDir = sys_get_temp_dir().'/testDir/';
-        mkdir($testDir, 0777);
+        if (!$this->fileService->exists($testDir)) {
+            mkdir($testDir, 0777);
+        }
 
         $testDirRelative = $this->fileService->relativePath($testDir, $fileName, sys_get_temp_dir());
         $this->assertEquals('testDir/', $testDirRelative, 'Directory relative path building failed');
@@ -120,26 +110,30 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         // Create test dir
         $testDir = sys_get_temp_dir().'/testDir/';
-        mkdir($testDir, 0777);
+        if (!$this->fileService->exists($testDir)) {
+            mkdir($testDir, 0777);
+        }
 
         // Try to null source file
-        $this->fileService->copyPath($path.'TEST', $testDir.$fileName);
+        $this->fileService->copy($path.'TEST', $testDir.$fileName);
 
         // Perform test
         $this->assertFileNotExists($testDir.$fileName, 'File service copy file failed - Copied file not found');
 
         // Move file to a new dir
-        $this->fileService->copyPath($path, $testDir.$fileName);
+        $this->fileService->copy($path, $testDir.$fileName);
 
         // Perform test
         $this->assertFileExists($testDir.$fileName, 'File service copy file failed - Copied file not found');
 
         // Create test dir
         $testDir2 = sys_get_temp_dir().'/testDir2/';
-        mkdir($testDir2, 0777);
+        if (!$this->fileService->exists($testDir2)) {
+            mkdir($testDir2, 0777);
+        }
 
         // Copy whole dir with new file to a second new dir
-        $this->fileService->copyPath($testDir, $testDir2);
+        $this->fileService->copy($testDir, $testDir2);
 
         // Perform test
         $this->assertFileExists($testDir2.$fileName, 'File service copy folder dir failed - Copied file not found');
@@ -149,7 +143,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $fileName2 = basename($path2);
 
         // Copy whole dir to a file
-        $this->fileService->copyPath(dirname($path2), $testDir2.$fileName2);
+        $this->fileService->copy(dirname($path2), $testDir2.$fileName2);
 
         // Perform test
         $this->assertFileNotExists($testDir2.$fileName2, 'File service copy file to folder failed - Copied file found');
@@ -164,17 +158,19 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         // Create test dir
         $testDir = sys_get_temp_dir().'/testDir/';
-        mkdir($testDir, 0777);
+        if (!$this->fileService->exists($testDir)) {
+            mkdir($testDir, 0777);
+        }
 
         // Move file to a new dir
-        $this->fileService->movePath($path, $testDir.$fileName);
+        $this->fileService->move($path, $testDir.$fileName);
 
         // Perform test
         $this->assertFileExists($testDir.$fileName, 'File service move file failed - Moved file not found');
         $this->assertFileNotExists($path, 'File service move file failed - Source file not deleted');
 
         // Test error situation when copy fails
-        $this->fileService->movePath($path.'TEST', $testDir.$fileName);
+        $this->fileService->move($path.'TEST', $testDir.$fileName);
     }
 
     /** Test file service extension method */
@@ -195,5 +191,21 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         // Perform test
         $this->assertEquals('text/x-c++', $extension, 'File service mime type method failed - Mime type is not correct');
+    }
+
+    /** Test file service dir method */
+    public function testDir()
+    {
+        // Scan project root dir
+        $files = $this->fileService->dir(dirname(dirname(__FILE__)));
+
+        // Scan first level project root dir
+        $this->fileService->dir(dirname(dirname(__FILE__)), null, 1);
+
+        // Scan null project root dir
+        $this->fileService->dir(dirname(dirname(__FILE__)).'/test', null, 1);
+
+        // Perform test
+        $this->assertEquals(true, in_array(__FILE__, $files), 'File service dir failed - This file is not found in listing');
     }
 }
