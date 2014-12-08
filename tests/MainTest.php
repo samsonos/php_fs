@@ -115,13 +115,13 @@ class EventTest extends \PHPUnit_Framework_TestCase
         }
 
         // Try to null source file
-        $this->fileService->copy($path.'TEST', $testDir.$fileName);
+        $this->fileService->copyPath($path.'TEST', $testDir.$fileName);
 
         // Perform test
         $this->assertFileNotExists($testDir.$fileName, 'File service copy file failed - Copied file not found');
 
         // Move file to a new dir
-        $this->fileService->copy($path, $testDir.$fileName);
+        $this->fileService->copyPath($path, $testDir.$fileName);
 
         // Perform test
         $this->assertFileExists($testDir.$fileName, 'File service copy file failed - Copied file not found');
@@ -133,7 +133,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         }
 
         // Copy whole dir with new file to a second new dir
-        $this->fileService->copy($testDir, $testDir2);
+        $this->fileService->copyPath($testDir, $testDir2);
 
         // Perform test
         $this->assertFileExists($testDir2.$fileName, 'File service copy folder dir failed - Copied file not found');
@@ -143,7 +143,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $fileName2 = basename($path2);
 
         // Copy whole dir to a file
-        $this->fileService->copy(dirname($path2), $testDir2.$fileName2);
+        $this->fileService->copyPath(dirname($path2), $testDir2.$fileName2);
 
         // Perform test
         $this->assertFileNotExists($testDir2.$fileName2, 'File service copy file to folder failed - Copied file found');
