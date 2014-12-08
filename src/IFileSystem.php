@@ -85,14 +85,6 @@ interface IFileSystem
     public function copy($filePath, $newPath);
 
     /**
-     * Move file to selected location
-     * @param string $filePath      Source path or file path
-     * @param string $newPath       New path or file path
-     * @return string|false False if failed otherwise path to moved file
-     */
-    public function move($filePath, $newPath);
-
-    /**
      * Get recursive $path listing collection
      * @param string    $path       Path for listing contents
      * @param int       $maxLevel   Maximum nesting level
