@@ -135,7 +135,7 @@ class FileService extends CompressableService implements IFileSystem
     /**
      * Get file mime type in current file system
      * @param $filePath string Path to file
-     * @return string|bool false if mime not found, otherwise file mime type
+     * @return false|integer|string false if mime not found, otherwise file mime type
      */
     public function mime($filePath)
     {
@@ -167,6 +167,6 @@ class FileService extends CompressableService implements IFileSystem
      */
     public function copyPath($filePath, $newPath)
     {
-        return $this->fileService->copy($filePath, $newPath);
+        return $this->fileService->copyPath($filePath, $newPath);
     }
 }

@@ -58,7 +58,7 @@ interface IFileSystem
     /**
      * Get file mime type in current file system
      * @param $filePath string Path to file
-     * @return string|bool false if mime not found, otherwise file mime type
+     * @return false|integer|string false if mime not found, otherwise file mime type
      */
     public function mime($filePath);
 
