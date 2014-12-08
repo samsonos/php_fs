@@ -82,7 +82,7 @@ interface IFileSystem
      * @param string $newPath       New path or file path
      * @return boolean False if failed otherwise true if file/folder has been copied
      */
-    public function copy($filePath, $newPath);
+    public function copyPath($filePath, $newPath);
 
     /**
      * Get recursive $path listing collection
