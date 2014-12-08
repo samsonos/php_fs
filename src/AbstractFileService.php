@@ -98,6 +98,8 @@ abstract class AbstractFileService implements IFileSystem
                     $newPath
                 );
             }
+
+            return true;
         } else { // Signal error
             return e(
                 'Cannot copy directory[##] - Destination file specified instead of directory[##]',
@@ -129,6 +131,8 @@ abstract class AbstractFileService implements IFileSystem
                 $fileName,
                 dirname($newPath)
             );
+
+            return true;
         } else { // Signal error
             return e(
                 'Cannot copy file[##] - Destination folder specified instead of file[##]',
