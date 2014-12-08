@@ -58,7 +58,6 @@ interface IFileSystem
     /**
      * Get recursive $path listing collection
      * @param string    $path       Path for listing contents
-     * @param array     $extensions Collection of file extensions to filter
      * @param int       $maxLevel   Maximum nesting level
      * @param int       $level      Current nesting level of recursion
      * @param array     $restrict   Collection of restricted paths
@@ -67,10 +66,9 @@ interface IFileSystem
      */
     public function dir(
         $path,
-        $extensions = null,
         $maxLevel = null,
         $level = 0,
-        $restrict = array('.git','.svn','.hg', '.settings'),
+        $restrict = array(),
         & $result = array()
     );
 }
