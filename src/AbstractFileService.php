@@ -169,23 +169,4 @@ abstract class AbstractFileService implements IFileSystem
             );
         }
     }
-
-    /**
-     * Move file to selected location
-     * @param string $filePath      Source path or file path
-     * @param string $newPath       New path or file path
-     * @return string|false False if failed otherwise path to moved file
-     */
-    public function move($filePath, $newPath)
-    {
-        // Copy path to a new location
-        if (($this->copy($filePath, $newPath)) !== false) {
-            // Remove current path
-            $this->delete($filePath);
-
-            return $newPath;
-        } else { // Copy failed
-            return false;
-        }
-    }
 }

@@ -137,4 +137,42 @@ class FileService extends CompressableService implements IFileSystem
     ) {
         return $this->fileService->dir($path, $maxLevel, $level, $restrict, $result);
     }
+
+    /**
+     * Get file mime type in current file system
+     * @param $filePath string Path to file
+     * @return string|bool false if mime not found, otherwise file mime type
+     */
+    public function mime($filePath)
+    {
+        return $this->fileService->mime($filePath);
+    }
+
+    /**
+     * Get relative path from $path
+     * @param string $fullPath Full file path
+     * @param string $fileName File name
+     * @param string $basePath Base path, must end WITHOUT '/', if not passed
+     *                          $fullPath one level top directory is used.
+     * @return string Relative path to file
+     */
+    public function relativePath($fullPath, $fileName, $basePath = null)
+    {
+        return $this->fileService->relativePath($fullPath, $fileName, $basePath);
+    }
+
+    /**
+     * Copy file/folder to selected location.
+     * Copy can be performed from file($filePath) to file($newPath),
+     * also copy can be performed from folder($filePath) to folder($newPath),
+     * currently copying from file($filePath) to folder($newPath) is not supported.
+     *
+     * @param string $filePath      Source path or file path
+     * @param string $newPath       New path or file path
+     * @return boolean False if failed otherwise true if file/folder has been copied
+     */
+    public function copy($filePath, $newPath)
+    {
+        return $this->fileService->copy($filePath, $newPath);
+    }
 }
