@@ -43,14 +43,8 @@ class FileService extends CompressableService implements IFileSystem
             $this->fileService = new $this->fileServiceClassName();
         }
 
-        // Configuration section
-        // Iterate all available current service variables
-        foreach (get_object_vars($this) as $var => $value) {
-            // Pass variable to object
-            if (property_exists($this->fileService, $var)) {
-                $this->fileService->$var = $value;
-            }
-        }
+        // Configuration file service instance with this service config
+        \samson\core\Config::implement($this->id, $this->fileService);
 
         // Call parent initialization
         return parent::init($params);
