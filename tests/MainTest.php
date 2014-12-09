@@ -32,17 +32,17 @@ class EventTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Test isDir */
-    /*public function testIsDir()
+    public function testIsDir()
     {
         // Read current file data
         $data = $this->fileService->isDir(__FILE__);
 
         // Compare current file with data read
         $this->assertEquals(false, $data, 'File service read failed');
-    }*/
+    }
 
     /** Test reading */
-    /*public function testRead()
+    public function testRead()
     {
         // Read current file data
         $data = $this->fileService->read(__FILE__);
@@ -50,9 +50,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Compare current file with data read
         $this->assertStringEqualsFile(__FILE__, $data, 'File service read failed');
     }
-*/
-    /** Test file service writing and reading */
-    /*public function testWriteRead()
+
+    /** Test file service writing */
+    public function testWrite()
     {
         // Create temporary file
         $path = tempnam(sys_get_temp_dir(), 'test');
@@ -60,15 +60,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Write data to temporary file
         $this->fileService->write('123', basename($path), sys_get_temp_dir());
 
-        // Read data from file
-        $data = $this->fileService->read($path);
-
-        // Write data to null temporary file
-        $this->fileService->write('123', basename($path).'TEST', sys_get_temp_dir().'test');
-
         // Perform test
-        $this->assertEquals('123', $data, 'File service writing failed');
-    }*/
+        $this->assertStringEqualsFile($path, '123', 'File service writing failed');
+    }
 
     /** Test file service deleting */
     public function testDelete()
