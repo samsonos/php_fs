@@ -85,29 +85,17 @@ abstract class AbstractFileService implements IFileSystem
      */
     protected function copyFolder($filePath, $newPath)
     {
-        // Check if we are copying dir - dir
-        if ($this->isDir($newPath)) {
-            // Read directory
-            foreach ($this->dir($filePath) as $file) {
-                // Get file name
-                $fileName = basename($file);
-                // Read source file and write to new location
-                $this->write(
-                    $this->read($file, $fileName),
-                    $fileName,
-                    $newPath
-                );
-            }
-
-            return true;
+        // Read directory
+        foreach ($this->dir($filePath) as $file) {
+            // Get file name
+            $fileName = basename($file);
+            // Read source file and write to new location
+            $this->write(
+                $this->read($file, $fileName),
+                $fileName,
+                $newPath
+            );
         }
-
-        // Signal error
-        return e(
-            'Cannot copy directory[##] - Destination file specified instead of directory[##]',
-            E_SAMSON_CORE_ERROR,
-            array($filePath, $newPath)
-        );
     }
 
     /**
@@ -118,29 +106,17 @@ abstract class AbstractFileService implements IFileSystem
      *
      * @param string $filePath      Source path or file path
      * @param string $newPath       New path or file path
-     * @return bool|null False if failed otherwise true if file/folder has been copied
      */
     protected function copyFile($filePath, $newPath)
     {
-        // Check if we are copying dir - dir
-        if (!$this->isDir($newPath)) {
-            // Get file name
-            $fileName = basename($newPath);
-            // Read and write file
-            $this->write(
-                $this->read($filePath, $fileName),
-                $fileName,
-                dirname($newPath)
-            );
+        // Get file name
+        $fileName = basename($newPath);
 
-            return true;
-        }
-
-        // Signal error
-        return e(
-            'Cannot copy file[##] - Destination folder specified instead of file[##]',
-            E_SAMSON_CORE_ERROR,
-            array($filePath, $newPath)
+        // Read and write file
+        $this->write(
+            $this->read($filePath, $fileName),
+            $fileName,
+            dirname($newPath)
         );
     }
 
