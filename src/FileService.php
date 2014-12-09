@@ -116,20 +116,12 @@ class FileService extends CompressableService implements IFileSystem
     /**
      * Get recursive $path listing collection
      * @param string $path Path for listing contents
-     * @param int $maxLevel Maximum nesting level
-     * @param int $level Current nesting level of recursion
      * @param array $restrict Collection of restricted paths
-     * @param array     $result   Collection of restricted paths
+     * @param array $result   Collection of restricted paths
      * @return array $path recursive directory listing
      */
-    public function dir(
-        $path,
-        $maxLevel = null,
-        $level = 0,
-        $restrict = array(),
-        & $result = array()
-    ) {
-        return $this->fileService->dir($path, $maxLevel, $level, $restrict, $result);
+    public function dir($path, $restrict = array(), & $result = array()) {
+        return $this->fileService->dir($path, $restrict, $result);
     }
 
     /**
