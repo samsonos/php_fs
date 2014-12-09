@@ -31,6 +31,16 @@ class EventTest extends \PHPUnit_Framework_TestCase
         \samson\core\Error::$OUTPUT = false;
     }
 
+    /** Test isDir */
+    public function testIsDir()
+    {
+        // Read current file data
+        $data = $this->fileService->isDir(__FILE__);
+
+        // Compare current file with data read
+        $this->assertEquals(false, $data, 'File service read failed');
+    }
+
     /** Test reading */
     public function testRead()
     {
