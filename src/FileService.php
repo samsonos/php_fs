@@ -120,7 +120,8 @@ class FileService extends CompressableService implements IFileSystem
      * @param array $result   Collection of restricted paths
      * @return array $path recursive directory listing
      */
-    public function dir($path, $restrict = array(), & $result = array()) {
+    public function dir($path, $restrict = array(), & $result = array())
+    {
         return $this->fileService->dir($path, $restrict, $result);
     }
 
