@@ -17,7 +17,15 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\LocalFileService');
+        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
+
+        // Init with unreal file service
+        $this->fileService->fileServiceClassName = 'samson\fs\test';
+        $this->fileService->init();
+
+        // Normal init
+        $this->fileService->fileServiceClassName = 'samson\fs\LocalFileService';
+        $this->fileService->init();
 
         // Disable default error output
         \samson\core\Error::$OUTPUT = false;
@@ -29,7 +37,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Read current file data
         $data = $this->fileService->read(__FILE__);
 
-        // Compare current file with data readed
+        // Compare current file with data read
         $this->assertStringEqualsFile(__FILE__, $data, 'File service read failed');
     }
 
