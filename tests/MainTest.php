@@ -194,7 +194,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $files = $this->fileService->dir(dirname(dirname(__FILE__)));
 
         // Scan first level project root dir
-        $this->fileService->dir(dirname(dirname(__FILE__)), null, 1);
+        $this->fileService->dir(dirname(dirname(__FILE__)), 1);
 
         // Scan null project root dir
         $this->fileService->dir(dirname(dirname(__FILE__)).'/test', null, 1);
