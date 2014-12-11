@@ -96,7 +96,7 @@ class LocalFileService extends AbstractFileService
     public function dir($path, $restrict = array(), & $result = array())
     {
         // Check if we can read this path
-        if (($handle = @opendir($path)) !== false) {
+        if (($handle = opendir($path)) !== false) {
             // Fastest reading method
             while (false !== ($entry = readdir($handle))) {
                 // Ignore root paths
@@ -104,12 +104,13 @@ class LocalFileService extends AbstractFileService
                     // Build full REAL path to entry
                     $fullPath = realpath($path . '/' . $entry);
 
-                    // Check if this folder is not in ignored list
-                    if ($this->isDir($fullPath) && (in_array($fullPath, $restrict) === false)) {
+                    // If this is a file
+                    if (!$this->isDir($fullPath)) {
+                        $result[] = $fullPath;
+                    } elseif (in_array($fullPath, $restrict) === false) {
+                        // Check if this folder is not in ignored list
                         // If this is a folder - go deeper in recursion
                         $this->dir($fullPath, $restrict, $result);
-                    } else { // If this is a file
-                        $result[] = $fullPath;
                     }
                 }
             }
@@ -122,5 +123,19 @@ class LocalFileService extends AbstractFileService
         }
 
         return $result;
+    }
+
+    /**
+     * Create catalog in selected location
+     * @param string    $path   Path for new catalog
+     * @return boolean  Result of catalog creating
+     */
+    public function mkDir($path)
+    {
+        if (!file_exists($path)) {
+            mkdir($path, 0775, true);
+            return true;
+        }
+        return false;
     }
 }

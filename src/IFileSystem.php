@@ -92,4 +92,11 @@ interface IFileSystem
      * @return array    $result     Resulting collection used in recursion
      */
     public function dir($path, $restrict = array(), & $result = array());
+
+    /**
+     * Create catalog in selected location
+     * @param string    $path   Path for new catalog
+     * @return boolean  Result of catalog creating
+     */
+    public function mkDir($path);
 }

@@ -166,4 +166,14 @@ class FileService extends CompressableService implements IFileSystem
     {
         return $this->fileService->copyPath($filePath, $newPath);
     }
+
+    /**
+     * Create catalog in selected location
+     * @param string    $path   Path for new catalog
+     * @return boolean  Result of catalog creating
+     */
+    public function mkDir($path)
+    {
+        return $this->fileService->mkDir($path);
+    }
 }

@@ -103,7 +103,8 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Create test dir
         $testDir = sys_get_temp_dir().'/testDir/';
         if (!$this->fileService->exists($testDir)) {
-            mkdir($testDir, 0777);
+            $this->fileService->mkDir($testDir);
+            $this->fileService->mkDir($testDir);
         }
 
         $testDirRelative = $this->fileService->relativePath($testDir, $fileName, sys_get_temp_dir());
@@ -123,7 +124,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Create test dir
         $testDir = sys_get_temp_dir().'/testDir/';
         if (!$this->fileService->exists($testDir)) {
-            mkdir($testDir, 0777);
+            $this->fileService->mkDir($testDir);
         }
 
         // Try to null source file
@@ -185,9 +186,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function testDir()
     {
         // Scan project root dir
-        $files = $this->fileService->dir(dirname(dirname(__FILE__)).'TEST');
+        $files = $this->fileService->dir(dirname(dirname(__FILE__)));
 
         // Perform test
-        $this->assertEquals(false, in_array(__FILE__, $files), 'File service dir failed - This file is not found in listing');
+        $this->assertEquals(true, in_array(__FILE__, $files), 'File service dir failed - This file is not found in listing');
     }
 }
