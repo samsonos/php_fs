@@ -107,13 +107,12 @@ class LocalFileService extends AbstractFileService
                 // Build full REAL path to entry
                 $fullPath = realpath($path . '/' . $entry);
 
-                // If this is a file
-                if (!$this->isDir($fullPath)) {
-                    $result[] = $fullPath;
-                } elseif (in_array($fullPath, $restrict) === false) {
-                    // Check if this folder is not in ignored list
+                // Check if this folder is not in ignored list
+                if ($this->isDir($fullPath) && (in_array($fullPath, $restrict) === false)) {
                     // If this is a folder - go deeper in recursion
                     $this->dir($fullPath, $restrict, $result);
+                } else { // If this is a file
+                    $result[] = $fullPath;
                 }
             }
 
