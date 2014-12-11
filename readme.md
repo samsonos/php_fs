@@ -39,7 +39,7 @@ class FileServiceConfig extends \samson\core\Config
   public $bucket = '...';
 }
 ```
-> You can define any public field in Config ancestor class and it will be automatically passed to internal file service handle as configuration.
+> You can define any public field in \samson\core\Config ancestor class and it will be automatically passed to internal file service handle as configuration.
 
 ## Usage
 
