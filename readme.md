@@ -33,9 +33,13 @@ class FileServiceConfig extends \samson\core\Config
   public $__id = 'fs';
   
   /**@var string Set Amazon Web Services as web-application file service using its identifier */
-  public $fileServiceID = 'samson\fs\AWSFileService';
+  public $fileServiceClassName = 'samson\fs\AWSFileService';
+  
+  /** Specify all other AWS related parameters */
+  public $bucket = '...';
 }
 ```
+> You can define any public field in Config ancestor class and it will be automatically passed to internal file service handle as configuration.
 
 ## Usage
 
