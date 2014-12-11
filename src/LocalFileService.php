@@ -100,19 +100,17 @@ class LocalFileService extends AbstractFileService
             // Fastest reading method
             while (false !== ($entry = readdir($handle))) {
                 // Ignore root paths
-                if ($entry == '..' || $entry == '.') {
-                    continue;
-                }
+                if ($entry != '..' && $entry != '.') {
+                    // Build full REAL path to entry
+                    $fullPath = realpath($path . '/' . $entry);
 
-                // Build full REAL path to entry
-                $fullPath = realpath($path . '/' . $entry);
-
-                // Check if this folder is not in ignored list
-                if ($this->isDir($fullPath) && (in_array($fullPath, $restrict) === false)) {
-                    // If this is a folder - go deeper in recursion
-                    $this->dir($fullPath, $restrict, $result);
-                } else { // If this is a file
-                    $result[] = $fullPath;
+                    // Check if this folder is not in ignored list
+                    if ($this->isDir($fullPath) && (in_array($fullPath, $restrict) === false)) {
+                        // If this is a folder - go deeper in recursion
+                        $this->dir($fullPath, $restrict, $result);
+                    } else { // If this is a file
+                        $result[] = $fullPath;
+                    }
                 }
             }
 
