@@ -39,7 +39,7 @@ class FileServiceConfig extends \samson\core\Config
   public $bucket = '...';
 }
 ```
-> You can define any public field in \samson\core\Config ancestor class and it will be automatically passed to internal file service handle as configuration.
+> When configuring external file service all configuration is do via ```fs``` module configuration class. You can define any public field in \samson\core\Config ancestor class and it will be automatically passed to internal file service handle as configuration, only one rule should be met - external file service field that you want to configure should be declared as ```public```. For example, you can read more information about configurating [SamsonPHP AWS file service ](https://github.com/samsonos/php_fs_aws/).
 
 ## Usage
 
