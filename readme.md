@@ -62,7 +62,7 @@ if (!$fs->exists(...)) {
 First of all you should create service instance:
 ```php
 // Create instance
-$this->fileService = new FileService(__DIR__.'../');
+$this->fileService = new \samson\fs\FileService(__DIR__.'../');
 ```
 In other places called after service creation you should retrieve service object via factory method:
 ```php
