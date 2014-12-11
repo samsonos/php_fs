@@ -45,7 +45,7 @@ abstract class AbstractFileService implements IFileSystem
     /**
      * File service initialization stage
      */
-    public function init()
+    public function initialize()
     {
         // Should be overloaded
     }
