@@ -32,7 +32,7 @@ class FileServiceConfig extends \samson\core\Config
   /**@var string Configured module/service identifier */
   public $__id = 'fs';
   
-  /**@var string Set Amazon Web Services as web-application file service using its identifier */
+  /**@var string Set Amazon Web Services as web-application file service using its class name */
   public $fileServiceClassName = 'samson\fs\AWSFileService';
   
   /** Specify all other AWS related parameters */
