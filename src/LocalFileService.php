@@ -97,7 +97,6 @@ class LocalFileService extends AbstractFileService
     {
         // Check if we can read this path
         if (($handle = opendir($path)) !== false) {
-
             // Fastest reading method
             while (false !== ($entry = readdir($handle))) {
                 // Ignore root paths
@@ -109,6 +108,7 @@ class LocalFileService extends AbstractFileService
                     if (!$this->isDir($fullPath)) {
                         $result[] = $fullPath;
                     } elseif (in_array($fullPath, $restrict) === false) {
+                        // Check if this folder is not in ignored list
                         // If this is a folder - go deeper in recursion
                         $this->dir($fullPath, $restrict, $result);
                     }
