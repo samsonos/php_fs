@@ -188,6 +188,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $files = $this->fileService->dir(dirname(dirname(__FILE__)).'TEST');
 
         // Perform test
-        $this->assertEquals(true, in_array(__FILE__, $files), 'File service dir failed - This file is not found in listing');
+        $this->assertEquals(false, in_array(__FILE__, $files), 'File service dir failed - This file is not found in listing');
     }
 }
