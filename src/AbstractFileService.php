@@ -43,6 +43,14 @@ abstract class AbstractFileService implements IFileSystem
     );
 
     /**
+     * File service initialization stage
+     */
+    public function init()
+    {
+        // Should be overloaded
+    }
+
+    /**
      * Get file mime type in current file system
      * @param $filePath string Path to file
      * @return false|integer|string false if mime not found, otherwise file mime type

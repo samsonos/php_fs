@@ -46,6 +46,9 @@ class FileService extends CompressableService implements IFileSystem
         // Configuration file service instance with this service config
         \samson\core\Config::implement($this->id, $this->fileService);
 
+        // Initialize file service
+        $this->fileService->init();
+
         // Call parent initialization
         return parent::init($params);
     }
