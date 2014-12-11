@@ -86,26 +86,6 @@ class LocalFileService extends AbstractFileService
         return is_dir($filePath);
     }
 
-    protected function handleEntry($path, $entry, $restrict = array(), & $result = array())
-    {
-        // Ignore root paths
-        if ($entry != '..' && $entry != '.') {
-            // Build full REAL path to entry
-            $fullPath = realpath($path . '/' . $entry);
-
-            // If this is a file
-            if (!$this->isDir($fullPath)) {
-                return $fullPath;
-            } elseif (in_array($fullPath, $restrict) === false) {
-                // If this is a folder - go deeper in recursion
-                return true;
-            }
-        }
-
-        // Cannot handle this entry
-        return false;
-    }
-
     /**
      * Get recursive $path listing collection
      * @param string $path Path for listing contents
