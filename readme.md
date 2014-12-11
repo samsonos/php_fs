@@ -49,19 +49,23 @@ To work with this SamsonPHP file service you should get file service instance po
 $fs = & m('fs');
 ```
 After this you can use all available methods from [```AbstractFileService``` interface](https://github.com/samsonos/php_fs/blob/master/src/IFileSystem.php), which this SamsonPHP file service(```fs```) implements. 
-All this method call act like a proxy and passes them to currently configured file service(by default ```php_fs_local```).
+All this method call acts like a proxy and passes them to currently configured file service(by default ```\samson\fs\LocalFileService```).
 
 Example usage:
 ```php
 if (!$fs->exists(...)) {
   $fs->write(...);
+  foreach ($fs->dir(...) as $file) {
+   ...
+  }
+  $fs->delete();
 }
 ```
 
 ### Using service in tests
-First of all you should create service instance:
+First of all you should create file service instance and store it as test class field:
 ```php
-// Create instance
+// Create service instance
 $this->fileService = new \samson\fs\FileService(__DIR__.'../');
 ```
 In other places called after service creation you should retrieve service object via factory method:
@@ -70,4 +74,4 @@ In other places called after service creation you should retrieve service object
 $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
 ```
 
-> All other SamsonPHP modules must and use this file service approach when working with files.
+> All other SamsonPHP modules must and already use this file service approach when working with file systems.
