@@ -21,10 +21,12 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
         // Init with unreal file service
         $this->fileService->fileServiceClassName = 'samson\fs\test';
+        $this->fileService->prepare();
         $this->fileService->init();
 
         // Normal init
         $this->fileService->fileServiceClassName = 'samson\fs\LocalFileService';
+        $this->fileService->prepare();
         $this->fileService->init();
 
         // Disable default error output
