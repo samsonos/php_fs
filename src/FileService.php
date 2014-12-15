@@ -27,19 +27,6 @@ class FileService extends CompressableService implements IFileSystem
 
     public function prepare()
     {
-        // Configuration file service instance with this service config
-        Config::implement($this->id, $this->fileService);
-        
-        return parent::prepare();
-    }
-
-    /**
-     * Initialize module
-     * @param array $params Collection of module parameters
-     * @return bool True if module successfully initialized
-     */
-    public function init(array $params = array())
-    {
         // If defined file service is not supported
         if (!class_exists($this->fileServiceClassName)) {
             // Signal error
@@ -52,6 +39,19 @@ class FileService extends CompressableService implements IFileSystem
             $this->fileService = new $this->fileServiceClassName();
         }
 
+        // Configuration file service instance with this service config
+        Config::implement($this->id, $this->fileService);
+
+        return parent::prepare();
+    }
+
+    /**
+     * Initialize module
+     * @param array $params Collection of module parameters
+     * @return bool True if module successfully initialized
+     */
+    public function init(array $params = array())
+    {
         // Initialize file service
         $this->fileService->initialize();
 
