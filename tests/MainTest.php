@@ -16,6 +16,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
     /** Tests init */
     public function setUp()
     {
+        // Disable default error output
+        \samson\core\Error::$OUTPUT = false;
+
         // Get instance using services factory as error will signal other way
         $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
 
@@ -28,9 +31,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->fileService->fileServiceClassName = 'samson\fs\LocalFileService';
         $this->fileService->prepare();
         $this->fileService->init();
-
-        // Disable default error output
-        \samson\core\Error::$OUTPUT = false;
     }
 
     /** Test isDir */

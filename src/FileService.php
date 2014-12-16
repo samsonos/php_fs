@@ -52,8 +52,10 @@ class FileService extends CompressableService implements IFileSystem
      */
     public function init(array $params = array())
     {
-        // Initialize file service
-        $this->fileService->initialize();
+        if (isset($this->fileService)) {
+            // Initialize file service
+            $this->fileService->initialize();
+        } 
 
         // Call parent initialization
         return parent::init($params);
