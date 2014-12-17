@@ -55,7 +55,7 @@ class FileService extends CompressableService implements IFileSystem
         if (isset($this->fileService)) {
             // Initialize file service
             $this->fileService->initialize();
-        } 
+        }
 
         // Call parent initialization
         return parent::init($params);
@@ -182,5 +182,12 @@ class FileService extends CompressableService implements IFileSystem
     public function mkDir($path)
     {
         return $this->fileService->mkDir($path);
+    }
+
+    /** Обработчик сериализации объекта */
+    public function __sleep()
+    {
+        // Remove all unnecessary fields from serialization
+        return array_diff(array_keys(get_object_vars($this)), array('fileService'));
     }
 }

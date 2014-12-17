@@ -193,4 +193,16 @@ class EventTest extends \PHPUnit_Framework_TestCase
         // Perform test
         $this->assertEquals(true, in_array(__FILE__, $files), 'File service dir failed - This file is not found in listing');
     }
+
+    /** Test file service dir method */
+    public function testSleep()
+    {
+        // Scan project root dir
+        $attrs = $this->fileService->__sleep();
+
+        var_dump($attrs);
+
+        // Perform test
+        $this->assertEquals(false, in_array('fileService', $attrs), 'File service sleep - FileService is found in listing');
+    }
 }
