@@ -22,6 +22,9 @@ class FileService extends CompressableService implements IFileSystem
     /** @var string Configurable file service class name */
     public $fileServiceClassName = 'samson\fs\LocalFileService';
 
+    /** @var array Collection of configuration parameters */
+    public $configuration = array();
+
     /** @var \samson\fs\AbstractFileService Pointer to file system adapter */
     protected $fileService;
 
@@ -44,8 +47,10 @@ class FileService extends CompressableService implements IFileSystem
             $this->fileService = new $this->fileServiceClassName();
         }
 
-        // Configuration file service instance with this service config
-        Config::implement($this->id, $this->fileService);
+        // Store configuration parameters to local field for compression
+        $this->configuration = & Config::$data[$this-id];
+        // Configure file service instance with this service config
+        Config::implement($this->id, $this->fileService, $this->configuration);
         
         // Initialize file service
         $this->fileService->initialize();
