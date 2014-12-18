@@ -51,7 +51,7 @@ class FileService extends CompressableService implements IFileSystem
         // Store configuration parameters to local field for compression
         // in compressed version this will be loaded from serialized data
         $this->configuration = & Config::$data[$this->id];
-        //[PHPCOMPRESSOR(remove,start)]
+        //[PHPCOMPRESSOR(remove,end)]
 
         // Configure file service instance with this service config
         Config::implement($this->id, $this->fileService, $this->configuration);
