@@ -43,7 +43,7 @@ class FileService extends CompressableService implements IFileSystem
                 E_SAMSON_CORE_ERROR,
                 $this->fileServiceClassName
             );
-        } else { // Create file service instance
+        } else { /** @var \samson\fs\AbstractFileService Create file service instance */
             $this->fileService = new $this->fileServiceClassName();
         }
 
