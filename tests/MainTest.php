@@ -33,6 +33,15 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->fileService->init();
     }
 
+    /** Test configuration of inner file service */
+    public function testConfigure()
+    {
+        require(__DIR__.'/TestEntityConfig.php');
+        $this->fileService->configure(new TestEntityConfig());
+
+        $this->assertArrayHasKey('testParam', $this->fileService->configuration);
+    }
+
     /** Test isDir */
     public function testIsDir()
     {
