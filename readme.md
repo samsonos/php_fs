@@ -9,6 +9,7 @@ of what exact file system is being used.
 [![Code Climate](https://codeclimate.com/github/samsonos/php_fs/badges/gpa.svg)](https://codeclimate.com/github/samsonos/php_fs) 
 [![Total Downloads](https://poser.pugx.org/samsonos/php_fs/downloads.svg)](https://packagist.org/packages/samsonos/php_fs)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonos/php_fs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonos/php_fs/?branch=master)
+[![Stories in Ready](https://badge.waffle.io/samsonos/php_fs.png?label=ready&title=Ready)](https://waffle.io/samsonos/php_compressor)
 
 ##Configuration  
 
