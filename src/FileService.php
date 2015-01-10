@@ -8,13 +8,14 @@
 namespace samson\fs;
 
 use samson\core\CompressableService;
-use samson\core\Config;
+use samson\core\Event;
+use samsonos\config\Entity;
 
 /**
  * File system module controller
  * @package samson\fs
  */
-class FileService extends CompressableService implements IFileSystem
+class FileService extends CompressableService implements IFileSystem, \samsonos\config\IConfigurable
 {
     /** @var string Module identifier */
     protected $id = 'fs';
@@ -38,30 +39,42 @@ class FileService extends CompressableService implements IFileSystem
         // If defined file service is not supported
         if (!class_exists($this->fileServiceClassName)) {
             // Signal error
-            return e(
-                'Cannot initialize file system adapter[##], class is not found',
-                E_SAMSON_CORE_ERROR,
-                $this->fileServiceClassName
+            Event::fire(
+                'error',
+                array(
+                    $this,
+                    'Cannot initialize file system adapter['.$this->fileServiceClassName.']'
+                )
             );
-        } else { /** @var \samson\fs\AbstractFileService Create file service instance */
+        } else {
+            /** @var \samson\fs\AbstractFileService Create file service instance */
             $this->fileService = new $this->fileServiceClassName();
+
+            // Set nested file service instance parameters
+            foreach ($this->configuration as $key => $value) {
+                $this->fileService->$key = $value;
+            }
+
+            // Initialize file service
+            $this->fileService->initialize();
         }
-
-        //[PHPCOMPRESSOR(remove,start)]
-        // Store configuration parameters to local field for compression
-        // in compressed version this will be loaded from serialized data
-        $this->configuration = & Config::$data[$this->id];
-        //[PHPCOMPRESSOR(remove,end)]
-
-        // Configure file service instance with this service config
-        Config::implement($this->id, $this->fileService, $this->configuration);
-
-        // Initialize file service
-        $this->fileService->initialize();
 
         // Call parent initialization
         return parent::init($params);
     }
+
+    //[PHPCOMPRESSOR(remove,start)]
+    /**
+     * @param Entity $entityConfiguration current instance for configuration
+     * @return boolean False if something went wrong otherwise true
+     */
+    public function configure(Entity $entityConfiguration)
+    {
+        // Convert object to array
+        $this->configuration = (array)$entityConfiguration;
+    }
+    //[PHPCOMPRESSOR(remove,end)]
+
     /**
      * Write data to a specific relative location
      *
