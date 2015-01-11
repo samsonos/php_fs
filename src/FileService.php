@@ -9,13 +9,12 @@ namespace samson\fs;
 
 use samson\core\CompressableService;
 use samson\core\Event;
-use samsonos\config\Entity;
 
 /**
  * File system module controller
  * @package samson\fs
  */
-class FileService extends CompressableService implements IFileSystem, \samsonos\config\IConfigurable
+class FileService extends CompressableService implements IFileSystem, \samsonos\core\IConfigurable
 {
     /** @var string Module identifier */
     protected $id = 'fs';
@@ -65,10 +64,10 @@ class FileService extends CompressableService implements IFileSystem, \samsonos\
 
     //[PHPCOMPRESSOR(remove,start)]
     /**
-     * @param Entity $entityConfiguration current instance for configuration
+     * @param mixed $entityConfiguration current instance for configuration
      * @return boolean False if something went wrong otherwise true
      */
-    public function configure(Entity $entityConfiguration)
+    public function configure($entityConfiguration)
     {
         // Convert object to array
         $this->configuration = (array)$entityConfiguration;
