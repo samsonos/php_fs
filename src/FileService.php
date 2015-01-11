@@ -62,7 +62,6 @@ class FileService extends CompressableService implements IFileSystem, \samsonos\
         return parent::init($params);
     }
 
-    //[PHPCOMPRESSOR(remove,start)]
     /**
      * @param mixed $entityConfiguration current instance for configuration
      * @return boolean False if something went wrong otherwise true
@@ -72,7 +71,6 @@ class FileService extends CompressableService implements IFileSystem, \samsonos\
         // Convert object to array
         $this->configuration = (array)$entityConfiguration;
     }
-    //[PHPCOMPRESSOR(remove,end)]
 
     /**
      * Write data to a specific relative location
