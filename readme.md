@@ -1,15 +1,15 @@
 #SamsonPHP File service 
+
+[![Latest Stable Version](https://poser.pugx.org/samsonphp/fs/v/stable.svg)](https://packagist.org/packages/samsonos/php_fs) 
+[![Build Status](https://travis-ci.org/samsonphp/fs.png)](https://travis-ci.org/samsonos/php_fs) 
+[![Code Coverage](https://scrutinizer-ci.com/g/samsonphp/fs/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/samsonos/php_fs/?branch=master)
+[![Code Climate](https://codeclimate.com/github/samsonphp/fs/badges/gpa.svg)](https://codeclimate.com/github/samsonos/php_fs) 
+[![Total Downloads](https://poser.pugx.org/samsonphp/fs/downloads.svg)](https://packagist.org/packages/samsonos/php_fs)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonphp/fs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonos/php_fs/?branch=master)
+[![Stories in Ready](https://badge.waffle.io/samsonphp/fs.png?label=ready&title=Ready)](https://waffle.io/samsonos/php_compressor)
  
 This module gives abstraction level for working with file system independently
 of what exact file system is being used.
- 
-[![Latest Stable Version](https://poser.pugx.org/samsonos/php_fs/v/stable.svg)](https://packagist.org/packages/samsonos/php_fs) 
-[![Build Status](https://travis-ci.org/samsonos/php_fs.png)](https://travis-ci.org/samsonos/php_fs) 
-[![Code Coverage](https://scrutinizer-ci.com/g/samsonos/php_fs/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/samsonos/php_fs/?branch=master)
-[![Code Climate](https://codeclimate.com/github/samsonos/php_fs/badges/gpa.svg)](https://codeclimate.com/github/samsonos/php_fs) 
-[![Total Downloads](https://poser.pugx.org/samsonos/php_fs/downloads.svg)](https://packagist.org/packages/samsonos/php_fs)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonos/php_fs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonos/php_fs/?branch=master)
-[![Stories in Ready](https://badge.waffle.io/samsonos/php_fs.png?label=ready&title=Ready)](https://waffle.io/samsonos/php_compressor)
 
 ##Configuration  
 
