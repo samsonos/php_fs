@@ -59,7 +59,7 @@ class FileService extends CompressableService implements IFileSystem, \samsonos\
         }
 
         // Call parent initialization
-        return parent::init($params);
+	    return parent::init($params);
     }
 
     /**
@@ -70,11 +70,10 @@ class FileService extends CompressableService implements IFileSystem, \samsonos\
     {
         // Convert object to array
         $this->configuration = (array)$entityConfiguration;
-
-	    // Set fileServiceClassName parameter from config
-	    if (!empty($this->configuration['fileServiceClassName']{0})) {
-		    $this->fileServiceClassName = $this->configuration['fileServiceClassName'];
-	    }
+        // Set fileServiceClassName parameter from config
+        if (!empty($this->configuration['fileServiceClassName']{0})) {
+	        $this->fileServiceClassName = $this->configuration['fileServiceClassName'];
+        }
     }
 
     /**
