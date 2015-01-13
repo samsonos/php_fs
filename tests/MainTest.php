@@ -150,7 +150,7 @@ class MainTest extends \PHPUnit_Framework_TestCase
         // Create test dir
         $testDir2 = sys_get_temp_dir().'/testDir2/';
         if (!$this->fileService->exists($testDir2)) {
-            mkdir($testDir2, 0777);
+            $this->fileService->mkDir($testDir2);
         }
 
         // Copy whole dir with new file to a second new dir
