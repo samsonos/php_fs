@@ -1,5 +1,5 @@
 <?php
-namespace samson\fs;
+namespace samsonphp\fs;
 
 /**
  * Generic file system adapter interface for writing/reading

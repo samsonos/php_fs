@@ -5,12 +5,12 @@
  * Date: 03.12.2014
  * Time: 20:26
  */
-namespace samson\fs;
+namespace samsonphp\fs;
 
 /**
  * Abstract IFileService implementation
  * with higher level functions implemented
- * @package samson\fs
+ * @package samsonphp\fs
  */
 abstract class AbstractFileService implements IFileSystem
 {

@@ -9,7 +9,7 @@
 namespace tests;
 
 
-class TestEntityConfig extends \samsonos\config\Entity
+class TestEntityConfig extends \samsonphp\config\Entity
 {
     public $testParam = 'testParam';
 } 

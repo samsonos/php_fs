@@ -6,7 +6,7 @@
  * Time: 14:12
  */
 
-namespace samson\fs;
+namespace samsonphp\fs;
 
 /**
  * Local file system adapter implementation
