@@ -1,16 +1,16 @@
 <?php
 namespace tests;
 
-use samson\fs\FileService;
-use samson\fs\LocalFileService;
+use samsonphp\fs\FileService;
+use samsonphp\fs\LocalFileService;
 
 /**
  * Created by Vitaly Iegorov <egorov@samsonos.com>
  * on 04.08.14 at 16:42
  */
-class EventTest extends \PHPUnit_Framework_TestCase
+class MainTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \samson\fs\LocalFileService Pointer to file service */
+    /** @var \samsonphp\fs\LocalFileService Pointer to file service */
     public $fileService;
 
     /** Tests init */
@@ -20,15 +20,15 @@ class EventTest extends \PHPUnit_Framework_TestCase
         \samson\core\Error::$OUTPUT = false;
 
         // Get instance using services factory as error will signal other way
-        $this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
+        $this->fileService = \samson\core\Service::getInstance('samsonphp\fs\FileService');
 
         // Init with unreal file service
-        $this->fileService->fileServiceClassName = 'samson\fs\test';
+        $this->fileService->fileServiceClassName = 'samsonphp\fs\test';
         $this->fileService->prepare();
         $this->fileService->init();
 
         // Normal init
-        $this->fileService->fileServiceClassName = 'samson\fs\LocalFileService';
+        $this->fileService->fileServiceClassName = 'samsonphp\fs\LocalFileService';
         $this->fileService->prepare();
         $this->fileService->init();
     }
