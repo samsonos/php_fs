@@ -35,10 +35,33 @@ class FileService extends CompressableService implements IFileSystem, \samsonos\
      */
     public function init(array $params = array())
     {
+        if (!$this->loadExternalService($this->fileServiceClassName)) {
+
+            // Signal error
+            Event::fire(
+                'error',
+                array(
+                    $this,
+                    'Cannot initialize file system adapter[' . $this->fileServiceClassName . ']'
+                )
+            );
+        }
+
+        // Call parent initialization
+        return parent::init($params);
+    }
+
+    /**
+     * Load external file service instance
+     * @param string $serviceClassName File service class name for loading
+     * @return bool True if external service instance has been created
+     */
+    public function loadExternalService($serviceClassName)
+    {
         // If defined file service is supported
-        if (class_exists($this->fileServiceClassName)) {
+        if (class_exists($serviceClassName)) {
             /** @var \samsonphp\fs\AbstractFileService Create file service instance */
-            $this->fileService = new $this->fileServiceClassName();
+            $this->fileService = new $serviceClassName();
 
             // Set nested file service instance parameters
             foreach ($this->configuration as $key => $value) {
@@ -48,20 +71,9 @@ class FileService extends CompressableService implements IFileSystem, \samsonos\
             // Initialize file service
             $this->fileService->initialize();
 
-            // Call parent initialization
-            return parent::init($params);
+            return true;
         }
 
-        // Signal error
-        Event::fire(
-            'error',
-            array(
-                $this,
-                'Cannot initialize file system adapter['.$this->fileServiceClassName.']'
-            )
-        );
-
-        // We have failed
         return false;
     }
 
