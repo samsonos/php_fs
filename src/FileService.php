@@ -8,7 +8,7 @@
 namespace samson\fs;
 
 use samson\core\CompressableService;
-use samson\core\Event;
+use samsonphp\event\Event;
 
 /**
  * File system module controller
