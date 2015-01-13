@@ -206,8 +206,6 @@ class MainTest extends \PHPUnit_Framework_TestCase
         // Scan project root dir
         $attrs = $this->fileService->__sleep();
 
-        var_dump($attrs);
-
         // Perform test
         $this->assertEquals(false, in_array('fileService', $attrs), 'File service sleep - FileService is found in listing');
     }
