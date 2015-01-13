@@ -1,5 +1,5 @@
 {
-	"name":"samsonos/php_fs",
+	"name":"samsonphp/fs",
     "description": "SamsonPHP file system service",
     "keywords": [ "file system", "samsonphp"],
     "authors":[
@@ -24,7 +24,7 @@
     "autoload" : {
         "classmap": ["src/"],
         "psr-0": {
-            "samsonos\\fs\\": "src/"
+            "samsonphp\\fs\\": "src/"
         }
     }
 }
