@@ -72,7 +72,7 @@ class FileService extends CompressableService implements IFileSystem, \samsonos\
         $this->configuration = (array)$entityConfiguration;
 
 	    // Set fileServiceClassName parameter from config
-	    if (isset($this->configuration['fileServiceClassName'])) {
+	    if (!empty($this->configuration['fileServiceClassName']{0})) {
 		    $this->fileServiceClassName = $this->configuration['fileServiceClassName'];
 	    }
     }
