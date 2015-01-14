@@ -165,8 +165,5 @@ abstract class AbstractFileService implements IFileSystem
      * @param string    $path   Path for new catalog
      * @return boolean  Result of catalog creating
      */
-    public function mkDir($path)
-    {
-        return true;
-    }
+    abstract public function mkDir($path);
 }
