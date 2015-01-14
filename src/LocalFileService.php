@@ -93,7 +93,15 @@ class LocalFileService extends AbstractFileService
      */
     protected function directoryFiles($path)
     {
-        return array_diff(scandir($path), array('..', '.'));
+        $result = array();
+
+        // Get all entries in path
+        foreach (array_diff(scandir($path), array('..', '.')) as $entry) {
+            // Build full REAL path to entry
+            $result[] = realpath($path . '/' . $entry);
+        }
+
+        return $result;
     }
 
     /**
@@ -106,11 +114,8 @@ class LocalFileService extends AbstractFileService
     public function dir($path, $restrict = array(), & $result = array())
     {
         // Check if we can read this path
-        foreach ($this->directoryFiles($path) as $entry) {
-            // Build full REAL path to entry
-            $fullPath = realpath($path . '/' . $entry);
-
-            // If this is a file
+        foreach ($this->directoryFiles($path) as $fullPath) {
+           // If this is a file
             if (!$this->isDir($fullPath)) {
                 $result[] = $fullPath;
             } elseif (in_array($fullPath, $restrict) === false) {
