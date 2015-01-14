@@ -87,6 +87,16 @@ class LocalFileService extends AbstractFileService
     }
 
     /**
+     * Get all entries in $path
+     * @param string $path Folfer path for listing
+     * @return array Collection of entries int folder
+     */
+    protected function directoryFiles($path)
+    {
+        return array_diff(scandir($path), array('..', '.'));
+    }
+
+    /**
      * Get recursive $path listing collection
      * @param string $path Path for listing contents
      * @param array $restrict Collection of restricted paths
@@ -96,7 +106,7 @@ class LocalFileService extends AbstractFileService
     public function dir($path, $restrict = array(), & $result = array())
     {
         // Check if we can read this path
-        foreach (array_diff(scandir($path), array('..', '.')) as $entry) {
+        foreach ($this->directoryFiles($path) as $entry) {
             // Build full REAL path to entry
             $fullPath = realpath($path . '/' . $entry);
 
