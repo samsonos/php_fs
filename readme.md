@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/SamsonPHP/fs.svg?branch=master)](https://travis-ci.org/SamsonPHP/fs)
 [![Code Coverage](https://scrutinizer-ci.com/g/samsonphp/fs/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/samsonphp/fs/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samsonphp/fs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/samsonphp/fs/?branch=master)
-[![Stories in Ready](https://badge.waffle.io/samsonphp/fs.png?label=ready&title=Ready)](https://waffle.io/samsonos/php_compressor) 
+[![Stories in Ready](https://badge.waffle.io/samsonphp/fs.png?label=ready&title=Ready)](https://waffle.io/samsonphp/fs_aws) 
 [![Total Downloads](https://poser.pugx.org/samsonphp/fs/downloads.svg)](https://packagist.org/packages/samsonphp/fs)
 
 This module gives abstraction level for working with file system independently
