@@ -17,11 +17,11 @@ service parameter.
 
 This is usually done using [SamsonPHP module/service configuration](https://github.com/samsonos/php_core/wiki/0.3-Configurating)
 
-By default ```$fileServiceClassName``` is set to ```samson\fs\LocalFileService``` - it uses standard local file
-system service. This parameter has to be set to file service class name, for example - local file service - ```samson\fs\LocalFileService```, no module/service identifiers or anything else should be used,
+By default ```$fileServiceClassName``` is set to ```samsonphp\fs\LocalFileService``` - it uses standard local file
+system service. This parameter has to be set to file service class name, for example - local file service - ```samsonphp\fs\LocalFileService```, no module/service identifiers or anything else should be used,
  first namespace separator ```\``` should be avoided too:
-  * ```\samson\fs\LocalFileService``` - incorrect
-  * ```samson\fs\LocalFileService``` - correct
+  * ```\samsonphp\fs\LocalFileService``` - incorrect
+  * ```samsonphp\fs\LocalFileService``` - correct
   
 > When service is initialized it checks if configured file service class is present otherwise fatal error is signaled.
 
@@ -33,7 +33,7 @@ class FileServiceConfig extends \samson\core\Config
   public $__id = 'fs';
   
   /**@var string Set Amazon Web Services as web-application file service using its identifier */
-  public $fileServiceID = 'samson\fs\AWSFileService';
+  public $fileServiceID = 'samsonphp\fs\AWSFileService';
 }
 ```
 
@@ -41,7 +41,7 @@ class FileServiceConfig extends \samson\core\Config
 
 To work with this SamsonPHP file service you should get file service instance pointer:
 ```php
-/**@var \samson\fs\FileService $fs Pointer to file service */
+/**@var \samsonphp\fs\FileService $fs Pointer to file service */
 $fs = & m('fs');
 ```
 After this you can use all available methods from [```AbstractFileService``` interface](https://github.com/samsonos/php_fs/blob/master/src/IFileSystem.php), which this SamsonPHP file service(```fs```) implements. 
@@ -63,7 +63,7 @@ $this->fileService = new FileService(__DIR__.'../');
 In other places called after service creation you should retrieve service object via factory method:
 ```php
 // Get instance using services factory as error will signal other way
-$this->fileService = \samson\core\Service::getInstance('samson\fs\FileService');
+$this->fileService = \samson\core\Service::getInstance('samsonphp\fs\FileService');
 ```
 
 > All other SamsonPHP modules must and use this file service approach when working with files.
