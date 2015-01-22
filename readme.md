@@ -15,7 +15,7 @@ of what exact file system is being used.
 The main goal is to configure the ```$fileServiceClassName```
 service parameter. 
 
-This is usually done using [SamsonPHP module/service configuration](https://github.com/samsonos/php_core/wiki/0.3-Configurating)
+This is usually done using [SamsonPHP module/service configuration](https://github.com/samsonphp/config)
 
 By default ```$fileServiceClassName``` is set to ```samsonphp\fs\LocalFileService``` - it uses standard local file
 system service. This parameter has to be set to file service class name, for example - local file service - ```samsonphp\fs\LocalFileService```, no module/service identifiers or anything else should be used,
@@ -25,7 +25,7 @@ system service. This parameter has to be set to file service class name, for exa
   
 > When service is initialized it checks if configured file service class is present otherwise fatal error is signaled.
 
-This gives you ability, for example, to quickly change your web-application file system from local file system to Amazon Web Services S3 bucket, which is implemented by [SamsonPHP AWS file service ```php_fs_aws```](http://github.com/samsonphp/fs_aws). All you have to do is add configuration for this SamsonPHP file service(```fs```):
+This gives you ability, for example, to quickly change your web-application file system from local file system to Amazon Web Services S3 bucket, which is implemented by [SamsonPHP AWS file service ```fs_aws```](http://github.com/samsonphp/fs_aws). All you have to do is add configuration for this SamsonPHP file service(```fs```):
 ```php
 class FileServiceConfig extends \samson\core\Config 
 {
@@ -44,7 +44,7 @@ To work with this SamsonPHP file service you should get file service instance po
 /**@var \samsonphp\fs\FileService $fs Pointer to file service */
 $fs = & m('fs');
 ```
-After this you can use all available methods from [```AbstractFileService``` interface](https://github.com/samsonos/php_fs/blob/master/src/IFileSystem.php), which this SamsonPHP file service(```fs```) implements. 
+After this you can use all available methods from [```AbstractFileService``` interface](https://github.com/samsonphp/fs/blob/master/src/IFileSystem.php), which this SamsonPHP file service(```fs```) implements. 
 All this method call act like a proxy and passes them to currently configured file service(by default ```php_fs_local```).
 
 Example usage:
